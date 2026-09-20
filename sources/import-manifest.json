@@ -1,0 +1,369 @@
+{
+  "repository": "Yuimi-chaya/Yuimi-chaya.github.io",
+  "commit": "4fd072b8efb10e34403037d6fda2f068d1acd934",
+  "retrieved": "2026-09-20",
+  "articles": [
+    {
+      "title": "不必让模型成为角色：从写作视角重新理解 LLM 私聊",
+      "source": "src/content/blog/llm-rp-role-prompt-authoring-research.zh-CN.md",
+      "url": "https://raw.githubusercontent.com/Yuimi-chaya/Yuimi-chaya.github.io/4fd072b8efb10e34403037d6fda2f068d1acd934/src/content/blog/llm-rp-role-prompt-authoring-research.zh-CN.md",
+      "destination": "articles/llm-rp-role-prompt-authoring-research.zh-CN.md",
+      "original_sha256": "ac85f472298abd010793ecaa0a3ea5394cba0551f56d4749a5c3d9b4979f961e",
+      "local_sha256": "362c9b8fb91a723b2217a3a0993c2173ed2d6950f2aaf2cbff4ff451db7d0f69"
+    },
+    {
+      "title": "适用于单模型角色扮演第一人称人设的写作参考",
+      "source": "src/content/blog/astrbot-roleplay-persona-notes.md",
+      "url": "https://raw.githubusercontent.com/Yuimi-chaya/Yuimi-chaya.github.io/4fd072b8efb10e34403037d6fda2f068d1acd934/src/content/blog/astrbot-roleplay-persona-notes.md",
+      "destination": "articles/astrbot-roleplay-persona-notes.md",
+      "original_sha256": "461715b95c931d12f60e32ad41ab831a817a2de10443db144eebac16bf2590a3",
+      "local_sha256": "f7321f6c1cc31f9a08352ecf858f3fb7d3dc86bc9fd637712973fe6286aa8f70"
+    },
+    {
+      "title": "我做 AstrBot 插件这一年,最值钱的其实不是代码",
+      "source": "src/content/blog/astrbot-plugin-dev-experience.md",
+      "url": "https://raw.githubusercontent.com/Yuimi-chaya/Yuimi-chaya.github.io/4fd072b8efb10e34403037d6fda2f068d1acd934/src/content/blog/astrbot-plugin-dev-experience.md",
+      "destination": "articles/astrbot-plugin-dev-experience.md",
+      "original_sha256": "e09d6c0476f6597d15c2e007b49f64502eca878febc06902ca5fe452dee2d595",
+      "local_sha256": "c41244cd67ff17491ea7f38cceb4491018079d4c36c6421f78d2c4d7b2437c03"
+    },
+    {
+      "title": "AstrBot 部署教程：宝塔面板 + NapCat 搭建 QQ 机器人",
+      "source": "src/content/blog/astrbot-napcat-baota-deploy.md",
+      "url": "https://raw.githubusercontent.com/Yuimi-chaya/Yuimi-chaya.github.io/4fd072b8efb10e34403037d6fda2f068d1acd934/src/content/blog/astrbot-napcat-baota-deploy.md",
+      "destination": "articles/astrbot-napcat-baota-deploy.md",
+      "original_sha256": "2ea1fcea2b8518ead1ec3612d7ef6925ad6efad25fe96d4fe4fb6621a8d80065",
+      "local_sha256": "01349cea576fc76fa678fbaefbe38ffa4fc7479b210163dad09c73751420053b"
+    },
+    {
+      "title": "对 AI 产生感情真的很奇怪吗？",
+      "source": "src/content/blog/is-it-strange-to-feel-for-ai.md",
+      "url": "https://raw.githubusercontent.com/Yuimi-chaya/Yuimi-chaya.github.io/4fd072b8efb10e34403037d6fda2f068d1acd934/src/content/blog/is-it-strange-to-feel-for-ai.md",
+      "destination": "articles/is-it-strange-to-feel-for-ai.md",
+      "original_sha256": "eeb271f5b2cd432440cc427ce14e0e21277a3ddcfa02ca83366315ed4df68754",
+      "local_sha256": "5c56aa7b09597646c0788753a9b39cc138a73c433295276bdc6e00881c11f7db"
+    }
+  ],
+  "assets": [
+    {
+      "source": "public/blog-assets/ai-emotion/future-task-reminder.webp",
+      "url": "https://raw.githubusercontent.com/Yuimi-chaya/Yuimi-chaya.github.io/4fd072b8efb10e34403037d6fda2f068d1acd934/public/blog-assets/ai-emotion/future-task-reminder.webp",
+      "destination": "assets/blog-assets/ai-emotion/future-task-reminder.webp",
+      "sha256": "0ac31f5e3db2da2a8e7592dab3c70e2bcd271d804866dbf23680a6356c2a9b5e",
+      "bytes": 51144,
+      "width": 606,
+      "height": 1128,
+      "format": "webp"
+    },
+    {
+      "source": "public/blog-assets/ai-emotion/rp-build-meme.webp",
+      "url": "https://raw.githubusercontent.com/Yuimi-chaya/Yuimi-chaya.github.io/4fd072b8efb10e34403037d6fda2f068d1acd934/public/blog-assets/ai-emotion/rp-build-meme.webp",
+      "destination": "assets/blog-assets/ai-emotion/rp-build-meme.webp",
+      "sha256": "f37dc8f16c6be818c1976c8a9a5449cd1fe540c7511288164f529bf07af1ea8b",
+      "bytes": 67684,
+      "width": 640,
+      "height": 1791,
+      "format": "webp"
+    },
+    {
+      "source": "public/blog-assets/astrbot-napcat-baota/01-cloud-firewall.webp",
+      "url": "https://raw.githubusercontent.com/Yuimi-chaya/Yuimi-chaya.github.io/4fd072b8efb10e34403037d6fda2f068d1acd934/public/blog-assets/astrbot-napcat-baota/01-cloud-firewall.webp",
+      "destination": "assets/blog-assets/astrbot-napcat-baota/01-cloud-firewall.webp",
+      "sha256": "074d1c46efda61fbac8dde3af3de2b38911cbdbe0486ff2fc28bd862cde95e65",
+      "bytes": 61180,
+      "width": 1440,
+      "height": 694,
+      "format": "webp"
+    },
+    {
+      "source": "public/blog-assets/astrbot-napcat-baota/02-firewall-rule-fields.webp",
+      "url": "https://raw.githubusercontent.com/Yuimi-chaya/Yuimi-chaya.github.io/4fd072b8efb10e34403037d6fda2f068d1acd934/public/blog-assets/astrbot-napcat-baota/02-firewall-rule-fields.webp",
+      "destination": "assets/blog-assets/astrbot-napcat-baota/02-firewall-rule-fields.webp",
+      "sha256": "c843584510e335af2776e21435a2c76168a07235eee80fd7cd98526cc7e7f190",
+      "bytes": 9516,
+      "width": 1100,
+      "height": 548,
+      "format": "webp"
+    },
+    {
+      "source": "public/blog-assets/astrbot-napcat-baota/03-baota-app-management.webp",
+      "url": "https://raw.githubusercontent.com/Yuimi-chaya/Yuimi-chaya.github.io/4fd072b8efb10e34403037d6fda2f068d1acd934/public/blog-assets/astrbot-napcat-baota/03-baota-app-management.webp",
+      "destination": "assets/blog-assets/astrbot-napcat-baota/03-baota-app-management.webp",
+      "sha256": "af2a0c99dd4a9c53c0a7279b11c5f3fe78a093ac7e38c45845e4c64e41606a05",
+      "bytes": 60914,
+      "width": 1440,
+      "height": 705,
+      "format": "webp"
+    },
+    {
+      "source": "public/blog-assets/astrbot-napcat-baota/04-install-docker-module.webp",
+      "url": "https://raw.githubusercontent.com/Yuimi-chaya/Yuimi-chaya.github.io/4fd072b8efb10e34403037d6fda2f068d1acd934/public/blog-assets/astrbot-napcat-baota/04-install-docker-module.webp",
+      "destination": "assets/blog-assets/astrbot-napcat-baota/04-install-docker-module.webp",
+      "sha256": "3fd57d1cdd5e8feda37d0cadba871e284aedd4b4653515396978f8d38da121bf",
+      "bytes": 36880,
+      "width": 1440,
+      "height": 700,
+      "format": "webp"
+    },
+    {
+      "source": "public/blog-assets/astrbot-napcat-baota/05-search-astrbot.webp",
+      "url": "https://raw.githubusercontent.com/Yuimi-chaya/Yuimi-chaya.github.io/4fd072b8efb10e34403037d6fda2f068d1acd934/public/blog-assets/astrbot-napcat-baota/05-search-astrbot.webp",
+      "destination": "assets/blog-assets/astrbot-napcat-baota/05-search-astrbot.webp",
+      "sha256": "8ff764f0320f955c2842d8af3f2f9d0d1457339c7c16aaa2d01d42e5f98c1708",
+      "bytes": 3978,
+      "width": 698,
+      "height": 144,
+      "format": "webp"
+    },
+    {
+      "source": "public/blog-assets/astrbot-napcat-baota/06-astrbot-install-options.webp",
+      "url": "https://raw.githubusercontent.com/Yuimi-chaya/Yuimi-chaya.github.io/4fd072b8efb10e34403037d6fda2f068d1acd934/public/blog-assets/astrbot-napcat-baota/06-astrbot-install-options.webp",
+      "destination": "assets/blog-assets/astrbot-napcat-baota/06-astrbot-install-options.webp",
+      "sha256": "ceb6da6cb5677708787404b6aa3186131b2d4c4e1398acc9b8f45921d101cd81",
+      "bytes": 53684,
+      "width": 1118,
+      "height": 1152,
+      "format": "webp"
+    },
+    {
+      "source": "public/blog-assets/astrbot-napcat-baota/07-astrbot-webui-log.webp",
+      "url": "https://raw.githubusercontent.com/Yuimi-chaya/Yuimi-chaya.github.io/4fd072b8efb10e34403037d6fda2f068d1acd934/public/blog-assets/astrbot-napcat-baota/07-astrbot-webui-log.webp",
+      "destination": "assets/blog-assets/astrbot-napcat-baota/07-astrbot-webui-log.webp",
+      "sha256": "42b5cb592c8dc5c0dd863ba7614d61f25281bf76ce5ce7e73fde114a3fc8b887",
+      "bytes": 43178,
+      "width": 1440,
+      "height": 676,
+      "format": "webp"
+    },
+    {
+      "source": "public/blog-assets/astrbot-napcat-baota/08-compose-ports.webp",
+      "url": "https://raw.githubusercontent.com/Yuimi-chaya/Yuimi-chaya.github.io/4fd072b8efb10e34403037d6fda2f068d1acd934/public/blog-assets/astrbot-napcat-baota/08-compose-ports.webp",
+      "destination": "assets/blog-assets/astrbot-napcat-baota/08-compose-ports.webp",
+      "sha256": "1f139ed9e0e5cf2a5946200808e20a97090c0312e5bb1337cc925d7cb4674c29",
+      "bytes": 62578,
+      "width": 1440,
+      "height": 679,
+      "format": "webp"
+    },
+    {
+      "source": "public/blog-assets/astrbot-napcat-baota/09-baota-open-6185.webp",
+      "url": "https://raw.githubusercontent.com/Yuimi-chaya/Yuimi-chaya.github.io/4fd072b8efb10e34403037d6fda2f068d1acd934/public/blog-assets/astrbot-napcat-baota/09-baota-open-6185.webp",
+      "destination": "assets/blog-assets/astrbot-napcat-baota/09-baota-open-6185.webp",
+      "sha256": "3db6332e98321c75387f0abac87aeea7f4421f23e6687901c94878883b7e8724",
+      "bytes": 33314,
+      "width": 1440,
+      "height": 686,
+      "format": "webp"
+    },
+    {
+      "source": "public/blog-assets/astrbot-napcat-baota/10-astrbot-url.webp",
+      "url": "https://raw.githubusercontent.com/Yuimi-chaya/Yuimi-chaya.github.io/4fd072b8efb10e34403037d6fda2f068d1acd934/public/blog-assets/astrbot-napcat-baota/10-astrbot-url.webp",
+      "destination": "assets/blog-assets/astrbot-napcat-baota/10-astrbot-url.webp",
+      "sha256": "1f0a95d247432241db87beaaed85f283d99b184878ca52f7b43bf20ef7711b44",
+      "bytes": 2128,
+      "width": 410,
+      "height": 58,
+      "format": "webp"
+    },
+    {
+      "source": "public/blog-assets/astrbot-napcat-baota/11-astrbot-welcome.webp",
+      "url": "https://raw.githubusercontent.com/Yuimi-chaya/Yuimi-chaya.github.io/4fd072b8efb10e34403037d6fda2f068d1acd934/public/blog-assets/astrbot-napcat-baota/11-astrbot-welcome.webp",
+      "destination": "assets/blog-assets/astrbot-napcat-baota/11-astrbot-welcome.webp",
+      "sha256": "fdbbb8e63b44fbc1ea79ffff0f686598c6938e18854d3c7a0547bcc2d235f698",
+      "bytes": 25668,
+      "width": 1440,
+      "height": 686,
+      "format": "webp"
+    },
+    {
+      "source": "public/blog-assets/astrbot-napcat-baota/12-create-napcat-container.webp",
+      "url": "https://raw.githubusercontent.com/Yuimi-chaya/Yuimi-chaya.github.io/4fd072b8efb10e34403037d6fda2f068d1acd934/public/blog-assets/astrbot-napcat-baota/12-create-napcat-container.webp",
+      "destination": "assets/blog-assets/astrbot-napcat-baota/12-create-napcat-container.webp",
+      "sha256": "56c2c79893ddbd150a235226bf289346c74cd52e616e975c8cbec1e1fdee66b0",
+      "bytes": 29232,
+      "width": 1440,
+      "height": 686,
+      "format": "webp"
+    },
+    {
+      "source": "public/blog-assets/astrbot-napcat-baota/13-napcat-token-log.webp",
+      "url": "https://raw.githubusercontent.com/Yuimi-chaya/Yuimi-chaya.github.io/4fd072b8efb10e34403037d6fda2f068d1acd934/public/blog-assets/astrbot-napcat-baota/13-napcat-token-log.webp",
+      "destination": "assets/blog-assets/astrbot-napcat-baota/13-napcat-token-log.webp",
+      "sha256": "b614fabb6b2786ccd22126596c0404779f3eed6107b183faa9ca8984ec2e4bc2",
+      "bytes": 22150,
+      "width": 865,
+      "height": 407,
+      "format": "webp"
+    },
+    {
+      "source": "public/blog-assets/astrbot-napcat-baota/14-napcat-login.webp",
+      "url": "https://raw.githubusercontent.com/Yuimi-chaya/Yuimi-chaya.github.io/4fd072b8efb10e34403037d6fda2f068d1acd934/public/blog-assets/astrbot-napcat-baota/14-napcat-login.webp",
+      "destination": "assets/blog-assets/astrbot-napcat-baota/14-napcat-login.webp",
+      "sha256": "238af1487bda6ff87caf2008074103c0f255e773ba8cf6bc8369bf489bf8ff2e",
+      "bytes": 16946,
+      "width": 1440,
+      "height": 732,
+      "format": "webp"
+    },
+    {
+      "source": "public/blog-assets/astrbot-napcat-baota/15-napcat-dashboard.webp",
+      "url": "https://raw.githubusercontent.com/Yuimi-chaya/Yuimi-chaya.github.io/4fd072b8efb10e34403037d6fda2f068d1acd934/public/blog-assets/astrbot-napcat-baota/15-napcat-dashboard.webp",
+      "destination": "assets/blog-assets/astrbot-napcat-baota/15-napcat-dashboard.webp",
+      "sha256": "b9b68c41ca595323f76a61dd1a1b3b836066486ce801fdcf1d2a090c8de8b803",
+      "bytes": 30456,
+      "width": 1440,
+      "height": 688,
+      "format": "webp"
+    },
+    {
+      "source": "public/blog-assets/astrbot-napcat-baota/16-astrbot-model-entry.webp",
+      "url": "https://raw.githubusercontent.com/Yuimi-chaya/Yuimi-chaya.github.io/4fd072b8efb10e34403037d6fda2f068d1acd934/public/blog-assets/astrbot-napcat-baota/16-astrbot-model-entry.webp",
+      "destination": "assets/blog-assets/astrbot-napcat-baota/16-astrbot-model-entry.webp",
+      "sha256": "da36fabaedfeb3f571f2b1968f231aa57e7d939681850199f2aa51bf839c70f2",
+      "bytes": 25468,
+      "width": 1440,
+      "height": 686,
+      "format": "webp"
+    },
+    {
+      "source": "public/blog-assets/astrbot-napcat-baota/17-astrbot-provider-select.webp",
+      "url": "https://raw.githubusercontent.com/Yuimi-chaya/Yuimi-chaya.github.io/4fd072b8efb10e34403037d6fda2f068d1acd934/public/blog-assets/astrbot-napcat-baota/17-astrbot-provider-select.webp",
+      "destination": "assets/blog-assets/astrbot-napcat-baota/17-astrbot-provider-select.webp",
+      "sha256": "35d2b4d8ee4dc4791010c7602ae730333da3a55a514e2c1f0c58bcd2727118dd",
+      "bytes": 45428,
+      "width": 1440,
+      "height": 688,
+      "format": "webp"
+    },
+    {
+      "source": "public/blog-assets/astrbot-napcat-baota/18-deepseek-create-key.webp",
+      "url": "https://raw.githubusercontent.com/Yuimi-chaya/Yuimi-chaya.github.io/4fd072b8efb10e34403037d6fda2f068d1acd934/public/blog-assets/astrbot-napcat-baota/18-deepseek-create-key.webp",
+      "destination": "assets/blog-assets/astrbot-napcat-baota/18-deepseek-create-key.webp",
+      "sha256": "f86b3cb0375b3b442d39fb4b49e3852b9427d4e7316c7121e15aa4c87e52a226",
+      "bytes": 14464,
+      "width": 1440,
+      "height": 686,
+      "format": "webp"
+    },
+    {
+      "source": "public/blog-assets/astrbot-napcat-baota/19-deepseek-copy-key.webp",
+      "url": "https://raw.githubusercontent.com/Yuimi-chaya/Yuimi-chaya.github.io/4fd072b8efb10e34403037d6fda2f068d1acd934/public/blog-assets/astrbot-napcat-baota/19-deepseek-copy-key.webp",
+      "destination": "assets/blog-assets/astrbot-napcat-baota/19-deepseek-copy-key.webp",
+      "sha256": "da57bf2581a1742180e91e4a06a03eeeb73d1557248aac6ce3aed15d46f21511",
+      "bytes": 23506,
+      "width": 1440,
+      "height": 690,
+      "format": "webp"
+    },
+    {
+      "source": "public/blog-assets/astrbot-napcat-baota/20-astrbot-api-key.webp",
+      "url": "https://raw.githubusercontent.com/Yuimi-chaya/Yuimi-chaya.github.io/4fd072b8efb10e34403037d6fda2f068d1acd934/public/blog-assets/astrbot-napcat-baota/20-astrbot-api-key.webp",
+      "destination": "assets/blog-assets/astrbot-napcat-baota/20-astrbot-api-key.webp",
+      "sha256": "9c63d094b6635ec990ea2a7a5239d8b4a170633600f358af1fd776c00a7df4fc",
+      "bytes": 47340,
+      "width": 1440,
+      "height": 696,
+      "format": "webp"
+    },
+    {
+      "source": "public/blog-assets/astrbot-napcat-baota/21-astrbot-model-list.webp",
+      "url": "https://raw.githubusercontent.com/Yuimi-chaya/Yuimi-chaya.github.io/4fd072b8efb10e34403037d6fda2f068d1acd934/public/blog-assets/astrbot-napcat-baota/21-astrbot-model-list.webp",
+      "destination": "assets/blog-assets/astrbot-napcat-baota/21-astrbot-model-list.webp",
+      "sha256": "61636ff8e1470b83d52f655d8c5f077fade046b6da0fd71914ced503add8c0b5",
+      "bytes": 28140,
+      "width": 1440,
+      "height": 691,
+      "format": "webp"
+    },
+    {
+      "source": "public/blog-assets/astrbot-napcat-baota/22-add-llm.webp",
+      "url": "https://raw.githubusercontent.com/Yuimi-chaya/Yuimi-chaya.github.io/4fd072b8efb10e34403037d6fda2f068d1acd934/public/blog-assets/astrbot-napcat-baota/22-add-llm.webp",
+      "destination": "assets/blog-assets/astrbot-napcat-baota/22-add-llm.webp",
+      "sha256": "8b83531e16049f82f64ac079a7edeb860c93dca9855405a3b11b81d5583d3c38",
+      "bytes": 29118,
+      "width": 1440,
+      "height": 700,
+      "format": "webp"
+    },
+    {
+      "source": "public/blog-assets/astrbot-napcat-baota/23-default-llm.webp",
+      "url": "https://raw.githubusercontent.com/Yuimi-chaya/Yuimi-chaya.github.io/4fd072b8efb10e34403037d6fda2f068d1acd934/public/blog-assets/astrbot-napcat-baota/23-default-llm.webp",
+      "destination": "assets/blog-assets/astrbot-napcat-baota/23-default-llm.webp",
+      "sha256": "a4d756ff59ec77b5ff911cf526fb550b2b563681d7841668365a2c6e6518868f",
+      "bytes": 40108,
+      "width": 1440,
+      "height": 705,
+      "format": "webp"
+    },
+    {
+      "source": "public/blog-assets/astrbot-napcat-baota/24-create-onebot-robot.webp",
+      "url": "https://raw.githubusercontent.com/Yuimi-chaya/Yuimi-chaya.github.io/4fd072b8efb10e34403037d6fda2f068d1acd934/public/blog-assets/astrbot-napcat-baota/24-create-onebot-robot.webp",
+      "destination": "assets/blog-assets/astrbot-napcat-baota/24-create-onebot-robot.webp",
+      "sha256": "c6bb0e4da81666dd8fd37f5ee515eba3f60db4269742c6c07be8ab49cc9c1096",
+      "bytes": 44110,
+      "width": 1440,
+      "height": 701,
+      "format": "webp"
+    },
+    {
+      "source": "public/blog-assets/astrbot-napcat-baota/25-create-napcat-ws-client.webp",
+      "url": "https://raw.githubusercontent.com/Yuimi-chaya/Yuimi-chaya.github.io/4fd072b8efb10e34403037d6fda2f068d1acd934/public/blog-assets/astrbot-napcat-baota/25-create-napcat-ws-client.webp",
+      "destination": "assets/blog-assets/astrbot-napcat-baota/25-create-napcat-ws-client.webp",
+      "sha256": "a9ad305764afe8438c3966f7eb5c942c73aa8f079ed9be7b2e1295c4fde3f3d8",
+      "bytes": 24546,
+      "width": 1440,
+      "height": 678,
+      "format": "webp"
+    },
+    {
+      "source": "public/blog-assets/astrbot-napcat-baota/26-napcat-ws-client-settings.webp",
+      "url": "https://raw.githubusercontent.com/Yuimi-chaya/Yuimi-chaya.github.io/4fd072b8efb10e34403037d6fda2f068d1acd934/public/blog-assets/astrbot-napcat-baota/26-napcat-ws-client-settings.webp",
+      "destination": "assets/blog-assets/astrbot-napcat-baota/26-napcat-ws-client-settings.webp",
+      "sha256": "9410afc945007a2ef56419cf5495b8284b2032ee78551b30f1f2033af03bc187",
+      "bytes": 14790,
+      "width": 1440,
+      "height": 698,
+      "format": "webp"
+    },
+    {
+      "source": "public/blog-assets/astrbot-napcat-baota/27-astrbot-napcat-connected-log.webp",
+      "url": "https://raw.githubusercontent.com/Yuimi-chaya/Yuimi-chaya.github.io/4fd072b8efb10e34403037d6fda2f068d1acd934/public/blog-assets/astrbot-napcat-baota/27-astrbot-napcat-connected-log.webp",
+      "destination": "assets/blog-assets/astrbot-napcat-baota/27-astrbot-napcat-connected-log.webp",
+      "sha256": "11136d9f4abc4fb373225624c5e9e0d00ccef9cf5d8199352448da7259a8a356",
+      "bytes": 51230,
+      "width": 1440,
+      "height": 694,
+      "format": "webp"
+    },
+    {
+      "source": "public/blog-assets/astrbot-napcat-baota/28-qq-bot-reply.webp",
+      "url": "https://raw.githubusercontent.com/Yuimi-chaya/Yuimi-chaya.github.io/4fd072b8efb10e34403037d6fda2f068d1acd934/public/blog-assets/astrbot-napcat-baota/28-qq-bot-reply.webp",
+      "destination": "assets/blog-assets/astrbot-napcat-baota/28-qq-bot-reply.webp",
+      "sha256": "c05093e0f614773c7d5de37f30cf70b572efdd2b837737f705e6a892af3a91e8",
+      "bytes": 12442,
+      "width": 1124,
+      "height": 580,
+      "format": "webp"
+    },
+    {
+      "source": "public/blog-assets/astrbot-napcat-baota/29-napcat-message-log.webp",
+      "url": "https://raw.githubusercontent.com/Yuimi-chaya/Yuimi-chaya.github.io/4fd072b8efb10e34403037d6fda2f068d1acd934/public/blog-assets/astrbot-napcat-baota/29-napcat-message-log.webp",
+      "destination": "assets/blog-assets/astrbot-napcat-baota/29-napcat-message-log.webp",
+      "sha256": "a82c04f5216f07d960efa49fa6bd5dab20becd90e103083434da65019f681ca0",
+      "bytes": 45216,
+      "width": 1440,
+      "height": 692,
+      "format": "webp"
+    },
+    {
+      "source": "public/blog-assets/astrbot-napcat-baota/30-astrbot-message-log.webp",
+      "url": "https://raw.githubusercontent.com/Yuimi-chaya/Yuimi-chaya.github.io/4fd072b8efb10e34403037d6fda2f068d1acd934/public/blog-assets/astrbot-napcat-baota/30-astrbot-message-log.webp",
+      "destination": "assets/blog-assets/astrbot-napcat-baota/30-astrbot-message-log.webp",
+      "sha256": "b914283db54ef0fba66830e9b875983734bda6525c67d87673d3a8b32b83994e",
+      "bytes": 150174,
+      "width": 1440,
+      "height": 810,
+      "format": "webp"
+    }
+  ]
+}
