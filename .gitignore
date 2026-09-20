@@ -1,0 +1,12 @@
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
+node_modules/
+__pycache__/
+*.py[cod]
+.preview/
+data/
+napcat/
+ntqq/

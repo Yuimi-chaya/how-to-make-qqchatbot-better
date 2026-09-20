@@ -1,0 +1,34 @@
+# Set explicit image tags or digests in .env before starting.
+# Configure OneBot manually in both WebUIs; this file does not set tokens.
+services:
+  astrbot:
+    image: ${ASTRBOT_IMAGE:?Set ASTRBOT_IMAGE to a verified tag or digest}
+    restart: unless-stopped
+    environment:
+      TZ: Asia/Shanghai
+    ports:
+      - "127.0.0.1:6185:6185"
+    volumes:
+      - ./data:/AstrBot/data
+    networks:
+      - bot
+
+  napcat:
+    image: ${NAPCAT_IMAGE:?Set NAPCAT_IMAGE to a verified tag or digest}
+    restart: unless-stopped
+    environment:
+      TZ: Asia/Shanghai
+      NAPCAT_UID: ${NAPCAT_UID:-1000}
+      NAPCAT_GID: ${NAPCAT_GID:-1000}
+    ports:
+      - "127.0.0.1:6099:6099"
+    volumes:
+      - ./data:/AstrBot/data
+      - ./napcat/config:/app/napcat/config
+      - ./ntqq:/app/.config/QQ
+    networks:
+      - bot
+
+networks:
+  bot:
+    driver: bridge
