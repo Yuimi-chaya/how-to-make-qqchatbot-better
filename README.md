@@ -46,7 +46,7 @@
 - [NapCatQQ](https://github.com/NapNeko/NapCatQQ) 与 [NapCat-Docker](https://github.com/NapNeko/NapCat-Docker)：本书安装实例使用的协议端与容器项目。
 - [OneBot v11](https://github.com/botuniverse/onebot-11)、[aiocqhttp](https://github.com/nonebot/aiocqhttp)：接口标准与相关 Python SDK，不是同一个概念。
 - [TurnFlow](https://github.com/Yuimi-chaya/astrbot_plugin_turnflow)：私聊消息防抖与未完成回复的动态撤回。
-- [NapCat 输入状态](https://github.com/ctrlkk/astrbot_plugin_input_state_by_nc)：生成回复时向 QQ 上报输入状态，不负责补发或打断。
+- [OneBot 私聊输入状态](https://github.com/ctrlkk/astrbot_plugin_input_state_by_nc)：向支持 `set_input_status` 的协议端上报输入状态，不负责补发或打断。
 - [表情包管理器](https://github.com/anka-afk/astrbot_plugin_meme_manager)：表情分类、语义检索与发送。
 - [llm_amnesia](https://github.com/SinkAbyss/astrbot_plugin_llm_amnesia)：手动移除当前会话的最近轮次，不自动清理独立记忆库。
 - [主动消息插件](https://github.com/DBJD-CR/astrbot_plugin_proactive_chat)：按会话触发私聊主动联系；与具体的 FutureTask 任务分开配置。
