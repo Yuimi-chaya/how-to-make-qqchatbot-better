@@ -1,0 +1,44 @@
+{
+  "figures": [
+    {
+      "path": "assets/book/01-astrbot-illustration.jpg",
+      "sha256": "f769630a9228e50c8650476a7d92799adbc28eea56edf79fa6cf012d28c65c2e",
+      "processing": "resized"
+    },
+    {
+      "path": "assets/book/02-astrbot-napcat-roles.jpg",
+      "sha256": "4004605d8bc9579916436346a5bfa2d38a70bceca194d7bb1d9b2dca582776d9",
+      "processing": "unchanged"
+    },
+    {
+      "path": "assets/book/03-onebot-typing-status.jpg",
+      "sha256": "876a6ce107dec17d3fb5889b16afbba853e76650ab741fe3c52fbdb830df0956",
+      "processing": "unchanged"
+    },
+    {
+      "path": "assets/book/04-future-task-redacted.png",
+      "sha256": "7eef3c2989972124ffd50c8d72d428aae26a085f3b3fb077b664f742ff50505e",
+      "processing": "redacted"
+    },
+    {
+      "path": "assets/book/05-meme-exchange.png",
+      "sha256": "78f40676ec3a90f935157909e8043c1b6a1bbbad491c8570bcda0e3831850506",
+      "processing": "unchanged"
+    },
+    {
+      "path": "assets/book/06-proactive-chat.png",
+      "sha256": "2a2ad8bb552e8a00e6017d18170b9dbc72d89c8628c9eb4259c3bbfe90f8624a",
+      "processing": "unchanged"
+    },
+    {
+      "path": "assets/book/07-quoted-segmentation.png",
+      "sha256": "397827ecdc7c4668874f587cd52dd9ff807019b856694bb27f8caf38f63639be",
+      "processing": "unchanged"
+    },
+    {
+      "path": "assets/book/08-debounced-reply.png",
+      "sha256": "62f20ca66cccd2ab0fd8a64718633a9ecc67034568230aeae1c5ba94e7250f20",
+      "processing": "unchanged"
+    }
+  ]
+}

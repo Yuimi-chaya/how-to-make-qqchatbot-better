@@ -107,6 +107,19 @@ def validate(root: Path) -> dict:
                 errors.append(f"invalid WebP header: {destination}")
             if file not in images:
                 errors.append(f"unreferenced imported image: {destination}")
+    figures = json.loads((root / "sources/figure-manifest.json").read_text(encoding="utf-8"))
+    if len(figures["figures"]) != 8:
+        errors.append("expected eight handbook figures")
+    for item in figures["figures"]:
+        destination = item["path"]
+        file = (root / destination).resolve()
+        if not file.is_relative_to(root) or not file.is_file():
+            errors.append(f"missing or invalid figure: {destination}")
+            continue
+        if hashlib.sha256(file.read_bytes()).hexdigest() != item["sha256"]:
+            errors.append(f"hash mismatch: {destination}")
+        if file not in images:
+            errors.append(f"unreferenced handbook figure: {destination}")
     chapters = sorted((root / "chapters").glob("*.md"))
     if len(chapters) != 10:
         errors.append("expected ten chapters")

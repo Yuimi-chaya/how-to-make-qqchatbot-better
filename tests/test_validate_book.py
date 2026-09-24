@@ -37,7 +37,7 @@ class BookTests(unittest.TestCase):
     def test_current_book(self):
         result = VALIDATOR.validate(ROOT)
         self.assertTrue(result["ok"], result["errors"])
-        self.assertEqual(result["referenced_images"], 32)
+        self.assertEqual(result["referenced_images"], 40)
 
     def test_example_admin_ports_default_to_loopback_and_onebot_stays_internal(self):
         compose = (ROOT / "examples/astrbot-napcat/compose.yaml").read_text(encoding="utf-8")
@@ -100,6 +100,15 @@ class BookTests(unittest.TestCase):
             shutil.copytree(ROOT, clone, ignore=shutil.ignore_patterns(".git", "__pycache__"))
             article = clone / "articles/astrbot-plugin-dev-experience.md"
             article.write_bytes(article.read_bytes() + b"\nChanged.\n")
+            result = VALIDATOR.validate(clone)
+            self.assertTrue(any("hash mismatch" in error for error in result["errors"]))
+
+    def test_modified_handbook_figure_is_detected(self):
+        with tempfile.TemporaryDirectory() as directory:
+            clone = Path(directory) / "book"
+            shutil.copytree(ROOT, clone, ignore=shutil.ignore_patterns(".git", "__pycache__"))
+            figure = clone / "assets/book/04-future-task-redacted.png"
+            figure.write_bytes(figure.read_bytes() + b"changed")
             result = VALIDATOR.validate(clone)
             self.assertTrue(any("hash mismatch" in error for error in result["errors"]))
 

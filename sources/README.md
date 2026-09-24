@@ -12,6 +12,8 @@
 
 第 3 章的输入状态、第 8 章的手动遗忘，于 **2026-09-24** 对照下表所列两个插件的固定提交源码与 README。输入状态插件虽然以 NapCat 命名，源码只判断 AstrBot 的 OneBot 私聊事件并调用所接协议端的 `set_input_status`；已有非 NapCat 协议端的使用反馈，但未逐一核对所有实现与客户端显示。该动作不在 [OneBot v11 基本接口](https://github.com/botuniverse/onebot-11/blob/d4456ee706f9ada9c2dfde56a2bcfc69752600e4/api/public.md)中。手动遗忘插件只修改 AstrBot 会话管理器的历史，不代替清理其他记忆插件的存储。
 
+八张新增配图由使用者提供，放在 `assets/book/`，清单见 [配图校验信息](figure-manifest.json)。README 插画缩小至适合阅读的尺寸；任务列表图只遮挡会话 ID；其他六张保持原字节。图像用于展示界面与互动样子，不作为插件效果或官方功能的独立证据，角色与第三方素材的再分发权限仍待确认。
+
 LLBot 官方脚本选项与分段链路于 **2026-09-24** 另行从 [LuckyLilliaBot 脚本固定提交](https://github.com/LLOneBot/LuckyLilliaBot/blob/9f374f6442b6c38a95841fc1d472cf6d8ea6149e/script/install-llbot-docker.sh)、[AstrBot 输出装饰](https://github.com/AstrBotDevs/AstrBot/blob/67c74b7ed8d5b8df170f849faaa431fc329c4ddc/astrbot/core/pipeline/result_decorate/stage.py)、[实际发送](https://github.com/AstrBotDevs/AstrBot/blob/67c74b7ed8d5b8df170f849faaa431fc329c4ddc/astrbot/core/pipeline/respond/stage.py)及[默认配置](https://github.com/AstrBotDevs/AstrBot/blob/67c74b7ed8d5b8df170f849faaa431fc329c4ddc/astrbot/core/config/default.py)核对。脚本原样会写入凭据、设置宽松目录权限并发布 WebUI 端口；本书只提供需人工检查后使用的示例，没有执行安装或登录 QQ。
 
 ## 文章来源

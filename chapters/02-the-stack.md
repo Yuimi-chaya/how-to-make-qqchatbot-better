@@ -19,6 +19,10 @@ flowchart TD
 
 图中是职责划分，不代表每次聊天都会调用工具，也不是模型内部的思考步骤。
 
+![AstrBot 与 NapCat 的形象化关系图](../assets/book/02-astrbot-napcat-roles.jpg)
+
+这张插画展示 AstrBot 与 NapCat 的两种职责，不是接口规范；实际链路以上面的流程和后文的接入说明为准。选择 LLBot 时，它承担协议端的位置。
+
 ## 四种角色，不要混称为“模型”
 
 | 名称 | 在这条链路里负责什么 |
