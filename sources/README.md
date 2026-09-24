@@ -8,6 +8,8 @@
 
 第 4、8 章新增的视觉转述与会话迁移说明于 **2026-09-24** 对照 [AstrBot 图片转述配置](https://docs.astrbot.app/dev/astrbot-config.html)、[内置新建对话指令](https://docs.astrbot.app/use/command.html)和 [WebUI 对话管理](https://docs.astrbot.app/use/webui.html) 复核。示例中的 `content` 数组是通用消息结构示意，不声称 WebUI 可直接导入，也不声称目标模型已经验收。
 
+第 4 章摸头表情只以文字描述，未纳入公开图片资源；例子里用户想摸角色，不等于模型单凭画面能确认身份或现实动作。第 8 章的主动聊天插件说明于 **2026-09-24** 对照下表所列插件 README 固定提交；提示词是通用教学示例，未在真实插件组合中测试。
+
 LLBot 官方脚本选项与分段链路于 **2026-09-24** 另行从 [LuckyLilliaBot 脚本固定提交](https://github.com/LLOneBot/LuckyLilliaBot/blob/9f374f6442b6c38a95841fc1d472cf6d8ea6149e/script/install-llbot-docker.sh)、[AstrBot 输出装饰](https://github.com/AstrBotDevs/AstrBot/blob/67c74b7ed8d5b8df170f849faaa431fc329c4ddc/astrbot/core/pipeline/result_decorate/stage.py)、[实际发送](https://github.com/AstrBotDevs/AstrBot/blob/67c74b7ed8d5b8df170f849faaa431fc329c4ddc/astrbot/core/pipeline/respond/stage.py)及[默认配置](https://github.com/AstrBotDevs/AstrBot/blob/67c74b7ed8d5b8df170f849faaa431fc329c4ddc/astrbot/core/config/default.py)核对。脚本原样会写入凭据、设置宽松目录权限并发布 WebUI 端口；本书只提供需人工检查后使用的示例，没有执行安装或登录 QQ。
 
 ## 文章来源
@@ -41,6 +43,7 @@ LLBot 官方脚本选项与分段链路于 **2026-09-24** 另行从 [LuckyLillia
 | TurnFlow | [`87a79b6` README](https://github.com/Yuimi-chaya/astrbot_plugin_turnflow/blob/87a79b69948d407605d58a7a375125790b736a6d/README.md) | 防抖、中断、撤回与兼容边界 |
 | 表情包管理器 | [`92de79e` README](https://github.com/anka-afk/astrbot_plugin_meme_manager/blob/92de79e441bb55d7159067edcc48adbb2d2f4015/README.md) | 分类、纯图、语义化、使用规则及资源准备 |
 | 表情包管理器开发文档 | [同提交 DEVELOPMENT.md](https://github.com/anka-afk/astrbot_plugin_meme_manager/blob/92de79e441bb55d7159067edcc48adbb2d2f4015/DEVELOPMENT.md) | 流式标签处理、图片发送时机、第三方联动 |
+| 主动消息插件 | [`3314246` README](https://github.com/Pancakes-Labs/astrbot_plugin_proactive_chat/blob/3314246568b2982ee0e44959e60f916de4154f71/README.md) | 私聊会话触发、提示词占位符、免打扰与未回复上限；不是 FutureTask |
 | Role Prompt Authoring | [`fb3c0e9`](https://github.com/Yuimi-chaya/llm-rp-role-prompt-authoring/tree/fb3c0e96020475122b47696e91d2093bfff851d4) | 偏好保全、最小修改、停止无效迭代与宿主泛化 |
 
 ## AstrBot 文档入口
