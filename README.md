@@ -27,11 +27,11 @@
 | [1. 我们想要怎样的 LLM RP](chapters/01-what-we-want.md) | 区分“回答得好”和“相处起来对味”，确定自己的目标 |
 | [2. QQ 聊天背后的整条链路](chapters/02-the-stack.md) | 分清 AstrBot、模型、OneBot、LLBot、NapCat 各自做什么 |
 | [3. 宿主先学会等人说完](chapters/03-host-and-turns.md) | 理解分段与轮次的不对称，用 TurnFlow 一类能力处理补充与打断 |
-| [4. 表情包也是完整的回应](chapters/04-memes-and-images.md) | 让机器人能不说正文，只发一个合适的表情；理解分类与语义检索 |
+| [4. 表情包也是完整的回应](chapters/04-memes-and-images.md) | 分清原生看图与转述，以及纯表情发送与检索 |
 | [5. 人设不只是口吻](chapters/05-persona.md) | 根据自己的偏好写、判断和修改提示词，保留人物而不堆规则 |
 | [6. 选一个适合相处的模型](chapters/06-models.md) | 在实际宿主里比较语感、上下文、工具、延迟与成本 |
 | [7. 实例：AstrBot + NapCat + 宝塔](chapters/07-astrbot-deployment.md) | 用宝塔界面搭好基础链路，分清管理页、协议端口与访问范围 |
-| [8. 记忆、时间与主动联系](chapters/08-memory-and-tools.md) | 先整理上下文与摘要，再决定是否需要检索记忆和主动任务 |
+| [8. 记忆、时间与主动联系](chapters/08-memory-and-tools.md) | 整理上下文，换人设时干净迁移，再决定是否需要记忆和主动任务 |
 | [9. 感觉不对时，怎么找原因](chapters/09-debugging.md) | 用少量有区分力的检查定位问题，避免无限返工 |
 | [10. 插件怎么加，系统怎么养](chapters/10-maintenance.md) | 逐项扩展、检查联动、备份升级，让日常使用稳定下来 |
 

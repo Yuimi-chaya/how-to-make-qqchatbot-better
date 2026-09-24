@@ -1,4 +1,5 @@
 import importlib.util
+import json
 import shutil
 import tempfile
 import unittest
@@ -44,6 +45,27 @@ class BookTests(unittest.TestCase):
         self.assertIn("${ADMIN_BIND_IP:-127.0.0.1}:6185:6185", compose)
         self.assertIn("${ADMIN_BIND_IP:-127.0.0.1}:6099:6099", compose)
         self.assertNotIn("6199:6199", compose)
+
+    def test_handoff_example_is_valid_json_with_labeled_synthetic_history(self):
+        example = json.loads(
+            (ROOT / "examples/conversation-handoff-history.example.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        self.assertEqual([item["role"] for item in example], ["user", "assistant"])
+        self.assertTrue(example[0]["content"][0]["text"].startswith("【历史对话摘要】"))
+        for heading in [
+            "【初始目标 / 长期主线】",
+            "【已讨论的核心话题与结论】",
+            "【当前最新焦点】",
+            "【关键配置 / 技术细节】",
+            "【用户偏好与风格要求】",
+            "【失败尝试 / 注意事项】",
+            "【待办 / 下一步】",
+        ]:
+            self.assertIn(heading, example[0]["content"][0]["text"])
+        self.assertEqual(example[1]["content"][0]["text"], "已收到")
+        self.assertNotIn("<system_reminder>", json.dumps(example, ensure_ascii=False))
 
     def test_missing_image_is_detected(self):
         with tempfile.TemporaryDirectory() as directory:

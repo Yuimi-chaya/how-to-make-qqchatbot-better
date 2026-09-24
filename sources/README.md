@@ -6,6 +6,8 @@
 
 第 7、8 章关于网页端口、Docker 映射和上下文压缩的说明于 **2026-09-24** 另行对照当前 [AstrBot 宝塔文档](https://docs.astrbot.app/deploy/astrbot/btpanel.html)、[上下文压缩文档](https://docs.astrbot.app/use/context-compress.html)、[NapCat-Docker README](https://github.com/NapNeko/NapCat-Docker) 和 [Docker 端口发布与防火墙文档](https://docs.docker.com/engine/network/port-publishing/) 复核；原项目快照提交没有随之更新。部署建议仍未在真实服务器上联调。
 
+第 4、8 章新增的视觉转述与会话迁移说明于 **2026-09-24** 对照 [AstrBot 图片转述配置](https://docs.astrbot.app/dev/astrbot-config.html)、[内置新建对话指令](https://docs.astrbot.app/use/command.html)和 [WebUI 对话管理](https://docs.astrbot.app/use/webui.html) 复核。示例中的 `content` 数组是通用消息结构示意，不声称 WebUI 可直接导入，也不声称目标模型已经验收。
+
 ## 文章来源
 
 上游：[Yuimi-chaya/Yuimi-chaya.github.io](https://github.com/Yuimi-chaya/Yuimi-chaya.github.io)。
