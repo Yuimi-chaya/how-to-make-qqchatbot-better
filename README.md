@@ -30,8 +30,8 @@
 | [4. 表情包也是完整的回应](chapters/04-memes-and-images.md) | 让机器人能不说正文，只发一个合适的表情；理解分类与语义检索 |
 | [5. 人设不只是口吻](chapters/05-persona.md) | 根据自己的偏好写、判断和修改提示词，保留人物而不堆规则 |
 | [6. 选一个适合相处的模型](chapters/06-models.md) | 在实际宿主里比较语感、上下文、工具、延迟与成本 |
-| [7. 实例：AstrBot + NapCat + 宝塔](chapters/07-astrbot-deployment.md) | 搭好基础链路，理解网络、凭据、模型与消息测试 |
-| [8. 记忆、时间与主动联系](chapters/08-memory-and-tools.md) | 把“记得”和“做到”落实到真实能力，同时保留自然的主动性 |
+| [7. 实例：AstrBot + NapCat + 宝塔](chapters/07-astrbot-deployment.md) | 用宝塔界面搭好基础链路，分清管理页、协议端口与访问范围 |
+| [8. 记忆、时间与主动联系](chapters/08-memory-and-tools.md) | 先整理上下文与摘要，再决定是否需要检索记忆和主动任务 |
 | [9. 感觉不对时，怎么找原因](chapters/09-debugging.md) | 用少量有区分力的检查定位问题，避免无限返工 |
 | [10. 插件怎么加，系统怎么养](chapters/10-maintenance.md) | 逐项扩展、检查联动、备份升级，让日常使用稳定下来 |
 
@@ -47,7 +47,7 @@
 - [表情包管理器](https://github.com/anka-afk/astrbot_plugin_meme_manager)：表情分类、语义检索与发送。
 - [Role Prompt Authoring](https://github.com/Yuimi-chaya/llm-rp-role-prompt-authoring)：提示词编写、审查与修改方法的参考来源，不是必装运行插件。
 
-项目功能与文档核对于 **2026-09-20**，具体参照提交见[来源索引](sources/README.md)。版本会变化，链接到项目不表示所有版本、平台和插件组合都经过本书实机验证。
+项目快照核对于 **2026-09-20**；上下文与部署端口的补充核对于 **2026-09-24**，具体参照提交与文档见[来源索引](sources/README.md)。版本会变化，链接到项目不表示所有版本、平台和插件组合都经过本书实机验证。
 
 ## 延伸阅读
 

@@ -4,6 +4,8 @@
 
 核对日期：**2026-09-20**。下表中的提交是本书编写时读取的快照，不表示最新稳定发行版，也不表示已在真实 QQ 环境测试。移动中的项目首页便于继续阅读，固定提交用于追溯本书的判断依据。
 
+第 7、8 章关于网页端口、Docker 映射和上下文压缩的说明于 **2026-09-24** 另行对照当前 [AstrBot 宝塔文档](https://docs.astrbot.app/deploy/astrbot/btpanel.html)、[上下文压缩文档](https://docs.astrbot.app/use/context-compress.html)、[NapCat-Docker README](https://github.com/NapNeko/NapCat-Docker) 和 [Docker 端口发布与防火墙文档](https://docs.docker.com/engine/network/port-publishing/) 复核；原项目快照提交没有随之更新。部署建议仍未在真实服务器上联调。
+
 ## 文章来源
 
 上游：[Yuimi-chaya/Yuimi-chaya.github.io](https://github.com/Yuimi-chaya/Yuimi-chaya.github.io)。

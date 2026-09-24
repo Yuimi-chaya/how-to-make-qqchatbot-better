@@ -37,6 +37,14 @@ class BookTests(unittest.TestCase):
         self.assertTrue(result["ok"], result["errors"])
         self.assertEqual(result["referenced_images"], 32)
 
+    def test_example_admin_ports_default_to_loopback_and_onebot_stays_internal(self):
+        compose = (ROOT / "examples/astrbot-napcat/compose.yaml").read_text(encoding="utf-8")
+        example_env = (ROOT / "examples/astrbot-napcat/.env.example").read_text(encoding="utf-8")
+        self.assertIn("ADMIN_BIND_IP=127.0.0.1", example_env)
+        self.assertIn("${ADMIN_BIND_IP:-127.0.0.1}:6185:6185", compose)
+        self.assertIn("${ADMIN_BIND_IP:-127.0.0.1}:6099:6099", compose)
+        self.assertNotIn("6199:6199", compose)
+
     def test_missing_image_is_detected(self):
         with tempfile.TemporaryDirectory() as directory:
             clone = Path(directory) / "book"

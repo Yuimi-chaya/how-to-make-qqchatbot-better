@@ -7,7 +7,7 @@ services:
     environment:
       TZ: Asia/Shanghai
     ports:
-      - "127.0.0.1:6185:6185"
+      - "${ADMIN_BIND_IP:-127.0.0.1}:6185:6185"
     volumes:
       - ./data:/AstrBot/data
     networks:
@@ -21,7 +21,7 @@ services:
       NAPCAT_UID: ${NAPCAT_UID:-1000}
       NAPCAT_GID: ${NAPCAT_GID:-1000}
     ports:
-      - "127.0.0.1:6099:6099"
+      - "${ADMIN_BIND_IP:-127.0.0.1}:6099:6099"
     volumes:
       - ./data:/AstrBot/data
       - ./napcat/config:/app/napcat/config
