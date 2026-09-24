@@ -1,5 +1,6 @@
 import importlib.util
 import json
+import re
 import shutil
 import tempfile
 import unittest
@@ -66,6 +67,22 @@ class BookTests(unittest.TestCase):
             self.assertIn(heading, example[0]["content"][0]["text"])
         self.assertEqual(example[1]["content"][0]["text"], "已收到")
         self.assertNotIn("<system_reminder>", json.dumps(example, ensure_ascii=False))
+
+    def test_segmentation_example_keeps_spaces_inside_bubbles(self):
+        pattern = (ROOT / "examples/astrbot-segment-regex.txt").read_text(
+            encoding="utf-8"
+        ).strip()
+        cleanup = re.compile(r"^[。\s]+|[。\s]+$")
+
+        def split(text):
+            segments = re.findall(pattern, text, re.DOTALL | re.MULTILINE)
+            return [cleaned for seg in segments if (cleaned := cleanup.sub("", seg).strip())]
+
+        self.assertEqual(split("你好，今天怎么样？"), ["你好，", "今天怎么样？"])
+        self.assertEqual(split("唔...\n你还醒着吗？"), ["唔...", "你还醒着吗？"])
+        self.assertEqual(split("甲（乙）丙"), ["甲", "（乙）", "丙"])
+        self.assertEqual(split("他说“好呀”然后笑了。"), ["他说", "“好呀”", "然后笑了"])
+        self.assertEqual(split("hello world。 next"), ["hello world", "next"])
 
     def test_missing_image_is_detected(self):
         with tempfile.TemporaryDirectory() as directory:

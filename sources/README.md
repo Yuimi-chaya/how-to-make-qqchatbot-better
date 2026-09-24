@@ -8,6 +8,8 @@
 
 第 4、8 章新增的视觉转述与会话迁移说明于 **2026-09-24** 对照 [AstrBot 图片转述配置](https://docs.astrbot.app/dev/astrbot-config.html)、[内置新建对话指令](https://docs.astrbot.app/use/command.html)和 [WebUI 对话管理](https://docs.astrbot.app/use/webui.html) 复核。示例中的 `content` 数组是通用消息结构示意，不声称 WebUI 可直接导入，也不声称目标模型已经验收。
 
+LLBot 官方脚本选项与分段链路于 **2026-09-24** 另行从 [LuckyLilliaBot 脚本固定提交](https://github.com/LLOneBot/LuckyLilliaBot/blob/9f374f6442b6c38a95841fc1d472cf6d8ea6149e/script/install-llbot-docker.sh)、[AstrBot 输出装饰](https://github.com/AstrBotDevs/AstrBot/blob/67c74b7ed8d5b8df170f849faaa431fc329c4ddc/astrbot/core/pipeline/result_decorate/stage.py)、[实际发送](https://github.com/AstrBotDevs/AstrBot/blob/67c74b7ed8d5b8df170f849faaa431fc329c4ddc/astrbot/core/pipeline/respond/stage.py)及[默认配置](https://github.com/AstrBotDevs/AstrBot/blob/67c74b7ed8d5b8df170f849faaa431fc329c4ddc/astrbot/core/config/default.py)核对。脚本原样会写入凭据、设置宽松目录权限并发布 WebUI 端口；本书只提供需人工检查后使用的示例，没有执行安装或登录 QQ。
+
 ## 文章来源
 
 上游：[Yuimi-chaya/Yuimi-chaya.github.io](https://github.com/Yuimi-chaya/Yuimi-chaya.github.io)。
@@ -30,6 +32,7 @@
 | --- | --- | --- |
 | AstrBot | [`6914bc3`](https://github.com/AstrBotDevs/AstrBot/tree/6914bc3aa61e14ca9a9c2cb37a0f9ec1ff5d6334) | 宿主、接入、主动任务与上下文能力 |
 | LLBot / LuckyLilliaBot | [`9f374f6` README](https://github.com/LLOneBot/LuckyLilliaBot/blob/9f374f6442b6c38a95841fc1d472cf6d8ea6149e/README.md) | 项目名称、协议端选项；不据此声称完整部署已验证 |
+| LLBot 官方 Docker 向导 | [同提交脚本](https://github.com/LLOneBot/LuckyLilliaBot/blob/9f374f6442b6c38a95841fc1d472cf6d8ea6149e/script/install-llbot-docker.sh) | 交互选项、生成文件、网络与权限风险；未实机运行 |
 | NapCatQQ | [`2049e64`](https://github.com/NapNeko/NapCatQQ/tree/2049e64260d378e9f1f1f318ae033347d46ab994) | QQ 协议端原项目 |
 | NapCat-Docker | [`f0599fb` README](https://github.com/NapNeko/NapCat-Docker/blob/f0599fb2eef4e9007aed72501849e2ca3eeaccdf/README.md) | 镜像、容器目录、WebUI |
 | NapCat-Docker AstrBot 模板 | [同提交 compose/astrbot.yml](https://github.com/NapNeko/NapCat-Docker/blob/f0599fb2eef4e9007aed72501849e2ca3eeaccdf/compose/astrbot.yml) | 同网络、媒体共享路径；本书另行收紧端口并选择手动连接 |

@@ -6,7 +6,7 @@
 
 先不用装记忆、表情、防抖和主动消息插件。基础链路跑通以后，才知道新增功能带来了什么变化。
 
-本章以 Linux 服务器上的宝塔 Docker 环境为例，使用 AstrBot + NapCat。LLBot 用户可以沿用前面的职责划分，但安装与协议端配置应跟随 [LLBot 原项目](https://github.com/LLOneBot/LuckyLilliaBot)，不要照抄 NapCat 的容器路径。
+本章以 Linux 服务器上的宝塔 Docker 环境为例，使用 AstrBot + NapCat。选择另一协议端的读者可看[LLBot 官方脚本安装实例](../guides/llbot-with-astrbot.md)；两个安装分支共享 AstrBot 的 OneBot 接入思路，但不要照抄彼此的容器路径和管理端口。
 
 ## 先确定访问方式
 
@@ -163,7 +163,7 @@ ssh -N -L 16185:127.0.0.1:6185 -L 16099:127.0.0.1:6099 管理账号@服务器地
 ws://astrbot:6199/ws
 ```
 
-这里的 `astrbot` 来自编排里的服务名，两者处在同一网络，所以可以解析。填写匹配的 OneBot token 并保存。
+这里的 `astrbot` 来自编排里的服务名，两者处在同一用户自定义网络，所以可以解析。也可以填同网络中 AstrBot 容器的内部 IP，但重建后可能改变，长期连接优先用服务名。填写匹配的 OneBot token 并保存。
 
 ![NapCat 新建 WebSocket 客户端的历史界面](../assets/blog-assets/astrbot-napcat-baota/25-create-napcat-ws-client.webp)
 
