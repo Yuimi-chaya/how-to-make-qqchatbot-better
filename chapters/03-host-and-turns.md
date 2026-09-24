@@ -60,6 +60,12 @@ QQ 上的人不总是把一句话写完整再发送。
 
 只有输出本身不合适时，才需要进一步检查模型和人设。哪怕回复很短，过时内容照样可能造成误解；哪怕回复很长，只要是你愿意听的一段话，也不必为了数量而删掉。
 
+## “正在输入”是界面状态
+
+等模型生成时，QQ 如果能显示“对方正在输入…”，等待会有一个可见信号。[input_state_by_nc](https://github.com/ctrlkk/astrbot_plugin_input_state_by_nc) 就是一个面向 **NapCat 私聊**的 AstrBot 插件：在 LLM 请求期间通过 NapCat 的 `set_input_status` 接口上报输入状态，回复处理前还会补报一次。它不让模型更快，也不会合并用户补发的消息或取消已排队的旧回复；显示了“正在输入”，不表示机器人能像人一样边看新消息边改正在生成的答案。
+
+这是依赖协议端与 QQ 客户端实际显示的可选体验。换用 LLBot 或其他协议端，不能只凭本书链接假设同样适用。安装后在自己的私聊里试一次正常生成、一次超时或中断，再看输入状态能否正常结束；不要让它和长时间分段发送一起造成“还在输入”却持续发旧内容的错觉。
+
 ## 一个可选实现：TurnFlow
 
 [TurnFlow](https://github.com/Yuimi-chaya/astrbot_plugin_turnflow) 是面向 AstrBot 私聊的防抖与动态撤回插件。作者也维护这个项目，下面按已核对 README 描述其能力，不将其当成唯一方案。
@@ -113,4 +119,4 @@ TurnFlow 不会事后自动改写所有已完成的回答。撤回受平台权�
 
 第一项偏向内容选择，后两项偏向宿主调度。不要用同一个气泡上限同时修这三种问题。
 
-参考：[TurnFlow README 与边界](https://github.com/Yuimi-chaya/astrbot_plugin_turnflow/blob/87a79b69948d407605d58a7a375125790b736a6d/README.md)。本章没有宣称已经完成你所用平台组合的联调。
+参考：[输入状态插件源码](https://github.com/ctrlkk/astrbot_plugin_input_state_by_nc/blob/5efb843aaaa2280c24e4874de086ddad31cbe3b4/main.py)、[TurnFlow README 与边界](https://github.com/Yuimi-chaya/astrbot_plugin_turnflow/blob/87a79b69948d407605d58a7a375125790b736a6d/README.md)。本章没有宣称已经完成你所用平台组合的联调。

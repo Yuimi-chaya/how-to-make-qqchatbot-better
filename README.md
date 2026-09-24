@@ -26,12 +26,12 @@
 | --- | --- |
 | [1. 我们想要怎样的 LLM RP](chapters/01-what-we-want.md) | 区分“回答得好”和“相处起来对味”，确定自己的目标 |
 | [2. QQ 聊天背后的整条链路](chapters/02-the-stack.md) | 分清 AstrBot、模型、OneBot、LLBot、NapCat 各自做什么 |
-| [3. 宿主先学会等人说完](chapters/03-host-and-turns.md) | 理解流式、正则分段与轮次的不对称，处理补充与打断 |
+| [3. 宿主先学会等人说完](chapters/03-host-and-turns.md) | 理解流式、分段与输入状态，处理补充与打断 |
 | [4. 表情包也是完整的回应](chapters/04-memes-and-images.md) | 分清原生看图与转述，以及纯表情发送与检索 |
 | [5. 人设不只是口吻](chapters/05-persona.md) | 根据自己的偏好写、判断和修改提示词，保留人物而不堆规则 |
 | [6. 选一个适合相处的模型](chapters/06-models.md) | 在实际宿主里比较语感、上下文、工具、延迟与成本 |
 | [7. 实例：AstrBot + NapCat + 宝塔](chapters/07-astrbot-deployment.md) | 用宝塔界面搭好基础链路，分清管理页、协议端口与访问范围 |
-| [8. 记忆、时间与主动联系](chapters/08-memory-and-tools.md) | 整理上下文、迁移人设，分清插件主动聊天与未来任务 |
+| [8. 记忆、时间与主动联系](chapters/08-memory-and-tools.md) | 整理上下文、手动删除最近轮次、迁移人设，分清主动聊天与未来任务 |
 | [9. 感觉不对时，怎么找原因](chapters/09-debugging.md) | 用少量有区分力的检查定位问题，避免无限返工 |
 | [10. 插件怎么加，系统怎么养](chapters/10-maintenance.md) | 逐项扩展、检查联动、备份升级，让日常使用稳定下来 |
 
@@ -46,11 +46,13 @@
 - [NapCatQQ](https://github.com/NapNeko/NapCatQQ) 与 [NapCat-Docker](https://github.com/NapNeko/NapCat-Docker)：本书安装实例使用的协议端与容器项目。
 - [OneBot v11](https://github.com/botuniverse/onebot-11)、[aiocqhttp](https://github.com/nonebot/aiocqhttp)：接口标准与相关 Python SDK，不是同一个概念。
 - [TurnFlow](https://github.com/Yuimi-chaya/astrbot_plugin_turnflow)：私聊消息防抖与未完成回复的动态撤回。
+- [NapCat 输入状态](https://github.com/ctrlkk/astrbot_plugin_input_state_by_nc)：生成回复时向 QQ 上报输入状态，不负责补发或打断。
 - [表情包管理器](https://github.com/anka-afk/astrbot_plugin_meme_manager)：表情分类、语义检索与发送。
+- [llm_amnesia](https://github.com/SinkAbyss/astrbot_plugin_llm_amnesia)：手动移除当前会话的最近轮次，不自动清理独立记忆库。
 - [主动消息插件](https://github.com/DBJD-CR/astrbot_plugin_proactive_chat)：按会话触发私聊主动联系；与具体的 FutureTask 任务分开配置。
 - [Role Prompt Authoring](https://github.com/Yuimi-chaya/llm-rp-role-prompt-authoring)：提示词编写、审查与修改方法的参考来源，不是必装运行插件。
 
-项目快照核对于 **2026-09-20**；上下文、部署端口与主动消息插件的补充核对于 **2026-09-24**，具体参照提交与文档见[来源索引](sources/README.md)。版本会变化，链接到项目不表示所有版本、平台和插件组合都经过本书实机验证。
+项目快照核对于 **2026-09-20**；上下文、部署端口与插件能力的补充核对于 **2026-09-24**，具体参照提交与文档见[来源索引](sources/README.md)。版本会变化，链接到项目不表示所有版本、平台和插件组合都经过本书实机验证。
 
 ## 延伸阅读
 

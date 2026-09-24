@@ -10,6 +10,8 @@
 
 第 4 章摸头表情只以文字描述，未纳入公开图片资源；例子里用户想摸角色，不等于模型单凭画面能确认身份或现实动作。第 8 章的主动聊天插件说明于 **2026-09-24** 对照下表所列插件 README 固定提交；提示词是通用教学示例，未在真实插件组合中测试。
 
+第 3 章的输入状态、第 8 章的手动遗忘，于 **2026-09-24** 对照下表所列两个插件的固定提交源码与 README。前者以 NapCat 的私聊状态接口为前提；后者只修改 AstrBot 会话管理器的历史，不代替清理其他记忆插件的存储。
+
 LLBot 官方脚本选项与分段链路于 **2026-09-24** 另行从 [LuckyLilliaBot 脚本固定提交](https://github.com/LLOneBot/LuckyLilliaBot/blob/9f374f6442b6c38a95841fc1d472cf6d8ea6149e/script/install-llbot-docker.sh)、[AstrBot 输出装饰](https://github.com/AstrBotDevs/AstrBot/blob/67c74b7ed8d5b8df170f849faaa431fc329c4ddc/astrbot/core/pipeline/result_decorate/stage.py)、[实际发送](https://github.com/AstrBotDevs/AstrBot/blob/67c74b7ed8d5b8df170f849faaa431fc329c4ddc/astrbot/core/pipeline/respond/stage.py)及[默认配置](https://github.com/AstrBotDevs/AstrBot/blob/67c74b7ed8d5b8df170f849faaa431fc329c4ddc/astrbot/core/config/default.py)核对。脚本原样会写入凭据、设置宽松目录权限并发布 WebUI 端口；本书只提供需人工检查后使用的示例，没有执行安装或登录 QQ。
 
 ## 文章来源
@@ -41,6 +43,8 @@ LLBot 官方脚本选项与分段链路于 **2026-09-24** 另行从 [LuckyLillia
 | OneBot v11 | [`d4456ee`](https://github.com/botuniverse/onebot-11/tree/d4456ee706f9ada9c2dfde56a2bcfc69752600e4) | 标准与实现端的区别 |
 | aiocqhttp | [`2520928`](https://github.com/nonebot/aiocqhttp/tree/2520928d2373f5be71059600b832e230a39ccdb9) | Python SDK 原项目 |
 | TurnFlow | [`87a79b6` README](https://github.com/Yuimi-chaya/astrbot_plugin_turnflow/blob/87a79b69948d407605d58a7a375125790b736a6d/README.md) | 防抖、中断、撤回与兼容边界 |
+| NapCat 输入状态 | [`5efb843` 源码](https://github.com/ctrlkk/astrbot_plugin_input_state_by_nc/blob/5efb843aaaa2280c24e4874de086ddad31cbe3b4/main.py) | NapCat 私聊 `set_input_status`、LLM 请求钩子与超时 |
+| llm_amnesia | [`7dc9bf8` README](https://github.com/SinkAbyss/astrbot_plugin_llm_amnesia/blob/7dc9bf835169f8352fbf2471e2f139d89149aaff/README.md) / [源码](https://github.com/SinkAbyss/astrbot_plugin_llm_amnesia/blob/7dc9bf835169f8352fbf2471e2f139d89149aaff/main.py) | 手动删除会话最近轮次与恢复；RAG 注入回显兼容不等于清理向量库 |
 | 表情包管理器 | [`92de79e` README](https://github.com/anka-afk/astrbot_plugin_meme_manager/blob/92de79e441bb55d7159067edcc48adbb2d2f4015/README.md) | 分类、纯图、语义化、使用规则及资源准备 |
 | 表情包管理器开发文档 | [同提交 DEVELOPMENT.md](https://github.com/anka-afk/astrbot_plugin_meme_manager/blob/92de79e441bb55d7159067edcc48adbb2d2f4015/DEVELOPMENT.md) | 流式标签处理、图片发送时机、第三方联动 |
 | 主动消息插件 | [`3314246` README](https://github.com/Pancakes-Labs/astrbot_plugin_proactive_chat/blob/3314246568b2982ee0e44959e60f916de4154f71/README.md) | 私聊会话触发、提示词占位符、免打扰与未回复上限；不是 FutureTask |

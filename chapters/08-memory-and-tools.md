@@ -67,11 +67,19 @@ AstrBot 文档中的默认摘要模板会提到项目进度和工具调用。这
 
 若要试，先限定一个会话、一个插件，抽查入库内容和回注片段，并实际试一次纠正与删除。不要把“检索命中”当成那段资料必然真实，也不要再同时启用另一份会注入相似资料的记忆插件。
 
+## 只想删掉最近一次不满意的回复
+
+不必为了一轮答歪的聊天就重写人设，或者直接丢掉整条会话。[llm_amnesia](https://github.com/SinkAbyss/astrbot_plugin_llm_amnesia) 提供手动指令：`/forget` 从当前 AstrBot 会话历史删除最新一轮，`/forget 3` 则删最近三轮（该版本支持一次 1 到 10 轮）。想反悔可在接着聊天前用 `/cancel_forget` 恢复；要重新回答，仍需自己再发送那句消息。该版本 README 要求 AstrBot v4.28.0+、Python 3.12+，安装前先核对环境。动手前备份重要对话，确认删的是当前会话，不把插件命令当作“让模型忘掉一切”的永久开关。
+
+例如用户说“有点睡不着”，机器人却连发几段不喜欢的关怀话术。若只是这次回复会把后文带偏，可以先手动移除这一轮，再按自己的意思继续；若同样的问题每次重现，就应回到第 9 章检查当前人设、模型和注入，删历史本身不会修好生成方式。
+
+这个插件改的是 **AstrBot 会话管理器里的对话历史**。QQ 窗口已显示的消息、先前压缩出的摘要，以及其他记忆插件自己的向量库，不会因为这里删了一轮就当然一起消失。项目 README 提到“RAG 兼容”，指的是处理被注入内容的回显，不能理解成它替你清空了外部记忆库。如果同时使用检索式记忆，下次请求仍可能重新注入被删内容；需要分别核对它们的入库、纠错和删除方式。
+
 ## 换人设时，给旧对话一个干净的入口
 
 情境：你改掉了角色卡里惯性追问的写法，却想保留过去聊过的事。如果直接在旧线程替换人设，旧回复仍是模型眼前的示范。它可能继续学那些连问或固定起手式；这不是每次都会发生，但值得和干净新会话对照。
 
-做法是**备份旧会话，在副本上整理，再用新的人设开新会话**。不要直接删除原线程，也不要把旧记录里“不好的回复”逐条贴进新会话并解释为什么不好。保留的是经过确认的事实、用户明确偏好、当前话题与还没完成的约定，不是旧角色每一句的语气。旧摘要、记忆插件和额外注入也要一起检查，否则新线程仍可能被旧材料带偏。
+做法是**备份旧会话，在副本上整理，再用新的人设开新会话**。只删最新一轮适合局部失误；换人设涉及一整段旧回复时，手动删一两轮未必足够。不要直接删除原线程，也不要把旧记录里“不好的回复”逐条贴进新会话并解释为什么不好。保留的是经过确认的事实、用户明确偏好、当前话题与还没完成的约定，不是旧角色每一句的语气。旧摘要、记忆插件和额外注入也要一起检查，否则新线程仍可能被旧材料带偏。
 
 整理时可以把脱敏后的旧对话和新版人设中**允许分享的目标与偏好**交给另一个模型，请它只做交接摘要。仓库提供一份可直接用于网页聊天端的[摘要请求文本](../examples/conversation-handoff-prompt.txt)：它覆盖长期主线、已讨论结论、最新焦点、关键配置、明确偏好、失败尝试和下一步；没有的项目写“无”，不要为了填满栏目而补故事。发往外部服务前，先删去账号、密钥、真实身份、私人图片、隐藏提示词和无关工具日志，并确认你接受对方处理这些内容。摘要回来后还要自己核对：用户改口是否保留、猜测有没有变成事实、旧回复的口癖有没有混进“用户偏好”。
 
@@ -169,4 +177,4 @@ AstrBot 文档中的默认摘要模板会提到项目进度和工具调用。这
 
 最后，提醒可提升体验，但不应被当作唯一可靠的现实保障。重要事项需要使用你能够确认可靠性的提醒渠道。
 
-参考：[主动消息插件 README](https://github.com/Pancakes-Labs/astrbot_plugin_proactive_chat/blob/3314246568b2982ee0e44959e60f916de4154f71/README.md)、[AstrBot 主动型能力](https://docs.astrbot.app/use/proactive-agent.html)、[上下文压缩](https://docs.astrbot.app/use/context-compress.html)、[Role Prompt Authoring 的宿主事实与能力边界](https://github.com/Yuimi-chaya/llm-rp-role-prompt-authoring/blob/fb3c0e96020475122b47696e91d2093bfff851d4/docs/zh-CN/runtime-profile.md)。
+参考：[遗忘插件 README](https://github.com/SinkAbyss/astrbot_plugin_llm_amnesia/blob/7dc9bf835169f8352fbf2471e2f139d89149aaff/README.md)、[主动消息插件 README](https://github.com/Pancakes-Labs/astrbot_plugin_proactive_chat/blob/3314246568b2982ee0e44959e60f916de4154f71/README.md)、[AstrBot 主动型能力](https://docs.astrbot.app/use/proactive-agent.html)、[上下文压缩](https://docs.astrbot.app/use/context-compress.html)、[Role Prompt Authoring 的宿主事实与能力边界](https://github.com/Yuimi-chaya/llm-rp-role-prompt-authoring/blob/fb3c0e96020475122b47696e91d2093bfff851d4/docs/zh-CN/runtime-profile.md)。
