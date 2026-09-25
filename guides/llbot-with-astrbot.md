@@ -4,6 +4,8 @@
 
 这是一条与 NapCat 并列的接入路线：**LLBot 连接 QQ，AstrBot 接收 OneBot v11 事件并调用聊天模型**。下文只讲 Linux 服务器上的官方 Docker 安装脚本和 AstrBot 的反向 WebSocket 连接；LLBot 不替你配置模型与人设，也不需要与 NapCat 同时登录同一个测试账号。
 
+这里不只是把脚本每一行重新抄一遍。你需要理解每个选择会改变什么：无头还是有头决定额外的容器和资源，WebSocket 客户端还是服务端决定谁主动建立连接，共享 Docker 网络决定是否需要把 `6199` 暴露到宿主机，是否立即启动决定你有没有机会先检查凭据、网络和生成的 Compose。知道这些关系，脚本菜单变化时也能自己判断，而不是只能等待一份完全相同的截图。
+
 操作以 [LuckyLilliaBot 官方脚本的固定提交](https://github.com/LLOneBot/LuckyLilliaBot/blob/9f374f6442b6c38a95841fc1d472cf6d8ea6149e/script/install-llbot-docker.sh)为准。脚本会写入真实凭据、生成 `docker-compose.yml` 和配置文件，还可能立即启动容器；先读完以下选择与风险，再在你自己的服务器执行。未在本书环境中登录 QQ 或实际运行该脚本。
 
 ## 准备一个单独目录
