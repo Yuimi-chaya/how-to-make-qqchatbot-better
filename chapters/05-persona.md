@@ -131,3 +131,7 @@
 不能仅凭作者能解释修改理由，就宣布问题已经解决。
 
 参考：[Role Prompt Authoring 当前 Skill](https://github.com/Yuimi-chaya/llm-rp-role-prompt-authoring/blob/fb3c0e96020475122b47696e91d2093bfff851d4/skills/role-prompt-authoring/role-prompt-authoring-skill.zh-CN.md)、[第一人称人设文章](../articles/astrbot-roleplay-persona-notes.md)、[写作视角文章](../articles/llm-rp-role-prompt-authoring-research.zh-CN.md)。
+
+---
+
+[上篇：表情包也是完整的回应](04-memes-and-images.md) · [目录](../README.md) · [下篇：选一个适合相处的模型](06-models.md)

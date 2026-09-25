@@ -92,3 +92,7 @@
 这里是一份记录示例，不是本书的实测结果。不会因为某个模型在六句对话里更合适，就推断它在所有人物上都领先。
 
 参考：[Role Prompt Authoring 的评估与分诊方法](https://github.com/Yuimi-chaya/llm-rp-role-prompt-authoring/blob/fb3c0e96020475122b47696e91d2093bfff851d4/docs/zh-CN/evaluation-and-triage.md)、[AstrBot 模型接入文档](https://docs.astrbot.app/providers/start.html)。
+
+---
+
+[上篇：人设不只是口吻](05-persona.md) · [目录](../README.md) · [下篇：AstrBot + NapCat + 宝塔](07-astrbot-deployment.md)

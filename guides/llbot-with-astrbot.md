@@ -83,3 +83,7 @@ sudo docker compose logs llbot
 `docker compose config` 和容器日志可能显示凭据或登录二维码，不要整段贴到公开求助帖。收发成功后记录脚本与镜像版本，备份配置和登录数据时同样按敏感文件处理。
 
 脚本、WebUI 和 QQ 客户端会更新。这里列的是所引固定版本的实际选项，不保证未来的菜单、镜像和自动登录行为完全一样；从原项目文档与脚本确认差异后再操作。
+
+---
+
+[上篇：QQ 聊天背后的整条链路](../chapters/02-the-stack.md) · [目录](../README.md) · [下篇：NapCat 安装实例](../chapters/07-astrbot-deployment.md)

@@ -366,3 +366,6 @@ WebUI 一旦涉及：
 - 如果要发布给更多用户,优先选择更保守、更兼容的写法.
 ````
 
+---
+
+[上篇：第一人称人设写作参考](astrbot-roleplay-persona-notes.md) · [目录](../README.md) · [下篇：宝塔部署教程](astrbot-napcat-baota-deploy.md)

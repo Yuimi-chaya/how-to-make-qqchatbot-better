@@ -402,3 +402,7 @@ ws://astrbot:6199/ws
 - AstrBot 文档：<https://docs.astrbot.app/>
 - AstrBot OneBot v11 接入文档：<https://docs.astrbot.app/platform/aiocqhttp.html>
 - Bilibili 主页：<https://space.bilibili.com/494350222>
+
+---
+
+[上篇：AstrBot 插件开发](astrbot-plugin-dev-experience.md) · [目录](../README.md) · [下篇：对 AI 产生感情真的很奇怪吗](is-it-strange-to-feel-for-ai.md)

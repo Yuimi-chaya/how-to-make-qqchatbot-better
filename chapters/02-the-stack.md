@@ -17,11 +17,9 @@ flowchart TD
     P --> R["QQ 上看见的回复"]
 ```
 
-图中是职责划分，不代表每次聊天都会调用工具，也不是模型内部的思考步骤。
-
 ![AstrBot 与 NapCat 的形象化关系图](../assets/book/02-astrbot-napcat-roles.jpg)
 
-这张插画展示 AstrBot 与 NapCat 的两种职责，不是接口规范；实际链路以上面的流程和后文的接入说明为准。选择 LLBot 时，它承担协议端的位置。
+选择 LLBot 时，它承担图中 NapCat 的协议端位置。
 
 ## 四种角色，不要混称为“模型”
 
@@ -89,3 +87,7 @@ QQ 实际发了什么
 日常不需要一直开着详细日志。但出了问题，先找第一个发生偏差的位置，比给人设补一句“认真理解用户”更有用。
 
 本章依据：[AstrBot](https://github.com/AstrBotDevs/AstrBot)、[OneBot v11 接入文档](https://docs.astrbot.app/platform/aiocqhttp.html)、[LLBot](https://github.com/LLOneBot/LuckyLilliaBot)、[NapCatQQ](https://github.com/NapNeko/NapCatQQ)。具体快照见[来源索引](../sources/README.md)。
+
+---
+
+[上篇：我们想要怎样的 LLM RP](01-what-we-want.md) · [目录](../README.md) · [下篇：宿主先学会等人说完](03-host-and-turns.md)

@@ -310,3 +310,7 @@
 - [本文对应的中文 Skill 快照](https://github.com/Yuimi-chaya/llm-rp-role-prompt-authoring/blob/e031d7ebc5fa5826fbe0707479a593711e331a0a/skills/role-prompt-authoring/role-prompt-authoring-skill.zh-CN.md)
 
 仓库提供双语 Skill、使用说明、架构与边界文档、验收用例以及历史归档.历史材料用于理解方法的来路,不应与当前 Skill 叠加使用.私有角色全文、真实聊天与平台配置不在公开交付范围内.
+
+---
+
+[上篇：文章目录](README.md) · [目录](../README.md) · [下篇：第一人称人设写作参考](astrbot-roleplay-persona-notes.md)

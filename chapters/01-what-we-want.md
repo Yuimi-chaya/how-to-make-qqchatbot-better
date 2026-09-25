@@ -75,3 +75,7 @@ LLM RP，是让大语言模型在设定与对话中表达一个角色。可以�
 如果现有体验已经合适，不必因为教程列了某个能力就去安装。更自然也不代表插件更多、工具更全或提示词更长。理解每一层负责什么，是为了知道什么时候值得动，什么时候可以不动。
 
 本章改编参考：[AI 陪伴随笔](../articles/is-it-strange-to-feel-for-ai.md)、[写作视角文章](../articles/llm-rp-role-prompt-authoring-research.zh-CN.md)。相关体验按作者叙述保留，不作为控制实验。
+
+---
+
+[上篇：阅读入口](../README.md) · [目录](../README.md) · [下篇：QQ 聊天背后的整条链路](02-the-stack.md)

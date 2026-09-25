@@ -44,7 +44,7 @@ QQ 上的人不总是把一句话写完整再发送。
 
 ![被引号包裹的一句显示在后一条气泡中](../assets/book/07-quoted-segmentation.png)
 
-这里的引号随短句留在同一条气泡里；截图展示的是最终显示，不单独证明模型输出和分段器各做了什么。
+引号与其中的短句一起显示，方便对照分段效果。
 
 内容过滤可以先留空。如果只是想去掉**段首尾**的句号和空白，同时保留英文词之间的空格，可填：
 
@@ -90,11 +90,9 @@ flowchart TD
     H --> C
 ```
 
-这是行为概览，不是插件的完整状态机；并发、迟到结果和历史保护还需要代码处理。
-
 ![用户连续发送三条消息后，机器人接在后面回复](../assets/book/08-debounced-reply.png)
 
-画面可见连续补充后的回复。它适合检查交互节奏；是否真的合并为一次模型请求，还要看宿主请求记录。
+用户的几条补充先出现，机器人随后接成一条回复。需要确认实际请求次数时再看宿主记录。
 
 当前 README 中，基础等待默认 2 秒，整轮收集默认最多 30 秒，动态防抖会调整实际等待。这些是该版本的默认值，不是本书推荐所有人固定使用的数值；收集上限也不包含图片转述和模型生成时间。
 
@@ -129,4 +127,8 @@ TurnFlow 不会事后自动改写所有已完成的回答。撤回受平台权�
 
 第一项偏向内容选择，后两项偏向宿主调度。不要用同一个气泡上限同时修这三种问题。
 
-参考：[输入状态插件源码](https://github.com/ctrlkk/astrbot_plugin_input_state_by_nc/blob/5efb843aaaa2280c24e4874de086ddad31cbe3b4/main.py)、[TurnFlow README 与边界](https://github.com/Yuimi-chaya/astrbot_plugin_turnflow/blob/87a79b69948d407605d58a7a375125790b736a6d/README.md)。本章没有宣称已经完成你所用平台组合的联调。
+参考：[输入状态插件源码](https://github.com/ctrlkk/astrbot_plugin_input_state_by_nc/blob/5efb843aaaa2280c24e4874de086ddad31cbe3b4/main.py)、[TurnFlow README 与边界](https://github.com/Yuimi-chaya/astrbot_plugin_turnflow/blob/87a79b69948d407605d58a7a375125790b736a6d/README.md)。
+
+---
+
+[上篇：QQ 聊天背后的整条链路](02-the-stack.md) · [目录](../README.md) · [下篇：表情包也是完整的回应](04-memes-and-images.md)

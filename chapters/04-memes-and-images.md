@@ -18,8 +18,6 @@
 
 ![私聊双方用表情包互相回应](../assets/book/05-meme-exchange.png)
 
-这是另一次图回图的可见形式，不要求机器人把每张图都翻译成文字。
-
 这不是漏答，而是一种完整的社交回应。与此同时，用户如果发的是报错截图并问“这里怎么修”，就应该按内容处理，不能只扔个表情装作接住了。
 
 需要给模型的是**选择空间**，不是“收到图片一律不说话”的新规定。
@@ -130,3 +128,7 @@
 最后，自动收集、图床同步和语义描述可能涉及他人发来的图片或外部模型。先了解数据会到哪里，再决定是否开启。本书不附送或再授权第三方表情包合集。
 
 参考：[表情包管理器 README](https://github.com/anka-afk/astrbot_plugin_meme_manager/blob/92de79e441bb55d7159067edcc48adbb2d2f4015/README.md)、[解析与联动接口](https://github.com/anka-afk/astrbot_plugin_meme_manager/blob/92de79e441bb55d7159067edcc48adbb2d2f4015/DEVELOPMENT.md)。
+
+---
+
+[上篇：宿主先学会等人说完](03-host-and-turns.md) · [目录](../README.md) · [下篇：人设不只是口吻](05-persona.md)

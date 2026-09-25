@@ -97,3 +97,7 @@
 作者应该帮助你看清差别，而不是立刻把自己的偏好填进去。
 
 本章方法参考：[评估与分诊](https://github.com/Yuimi-chaya/llm-rp-role-prompt-authoring/blob/fb3c0e96020475122b47696e91d2093bfff851d4/docs/zh-CN/evaluation-and-triage.md)。本书例子用于教学，不是新一轮模型测试。
+
+---
+
+[上篇：记忆、时间与主动联系](08-memory-and-tools.md) · [目录](../README.md) · [下篇：插件怎么加，系统怎么养](10-maintenance.md)

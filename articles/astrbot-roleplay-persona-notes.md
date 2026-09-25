@@ -384,3 +384,6 @@ description: Guide the model to write, debug, and port character/persona prompts
 - 最终角色卡简洁、明确、可执行，并为必要例外保留空间。
 ````
 
+---
+
+[上篇：写作视角与 LLM 私聊](llm-rp-role-prompt-authoring-research.zh-CN.md) · [目录](../README.md) · [下篇：AstrBot 插件开发](astrbot-plugin-dev-experience.md)

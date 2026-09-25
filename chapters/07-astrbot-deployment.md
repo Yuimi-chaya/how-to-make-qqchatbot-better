@@ -2,207 +2,320 @@
 
 [上一章](06-models.md) · [目录](../README.md) · [下一章：记忆与工具](08-memory-and-tools.md)
 
-这一章先完成一件事：**QQ 发来一条消息，AstrBot 调用模型，再把回答送回 QQ。**
-
-先不用装记忆、表情、防抖和主动消息插件。基础链路跑通以后，才知道新增功能带来了什么变化。
-
-本章以 Linux 服务器上的宝塔 Docker 环境为例，使用 AstrBot + NapCat。选择另一协议端的读者可看[LLBot 官方脚本安装实例](../guides/llbot-with-astrbot.md)；两个安装分支共享 AstrBot 的 OneBot 接入思路，但不要照抄彼此的容器路径和管理端口。
-
-## 先确定访问方式
-
-旧的[宝塔部署文章](../articles/astrbot-napcat-baota-deploy.md)保留了完整操作截图，但其中直接映射多个端口、建议先留空 token、使用 `latest` 的做法，不作为这里的默认方案。截图用来认页面和字段，不要求复制图片里的地址、凭据或全部配置。
-
-本章的容器与端口分工：
-
-- 两个容器在同一台服务器、同一 Docker 网络。
-- NapCat 用容器服务名连接 AstrBot，不让这段通信绕公网。
-- AstrBot 管理页使用宿主机 `6185`，NapCat 管理页使用宿主机 `6099`；模板默认仅绑定回环地址，要直接通过服务器 IP 访问时再按下文调整。
-- AstrBot 的 `6199` 是 OneBot 反向 WebSocket 服务端口，**不是管理页面**；同网络容器可以连接，不需要把它发布到宿主机。
-- OneBot 连接两端设置一致的非空随机 token。
-
-宝塔本来就有图形化的 Docker、编排、容器日志和安全设置，本章以页面操作为主。管理页可以从可信内网或 VPN 使用 `服务器IP:端口` 打开；如果只能走公网，先为日常管理准备 HTTPS 的受限入口。SSH 隧道只是可选的访问方法，不是安装 AstrBot 的前置要求。
-
-| 端口 | 本例用途 | 模板的初始映射 |
-| --- | --- | --- |
-| `6185` | AstrBot 管理页面 | 宿主机回环地址；按访问方式决定是否调整 |
-| `6099` | NapCat 管理页面 | 宿主机回环地址；按访问方式决定是否调整 |
-| `6199` | AstrBot OneBot v11 服务 | 仅供同网络容器访问，不发布到宿主机公网 |
-| `3000 / 3001` | NapCat 可选服务 | 本例不用，不映射 |
-
-从外部打开管理页，要分别检查三件事：**云服务器安全组或上游防火墙**是否允许你的来源 IP，**宝塔“安全”中管理的服务器系统防火墙**是否允许相应访问，以及 **Docker 编排是否将这个端口映射到外部可达的宿主机地址**。宝塔页面管理的规则通常就是服务器上的防火墙规则，不一定还有一套独立的“面板防火墙”。[Docker 官方文档](https://docs.docker.com/engine/install/ubuntu/#firewall-limitations)提醒，发布的端口可能绕过 ufw/firewalld 的规则，不能只凭宝塔页面显示“已禁止”就认定外网不可访问；还要从另一条网络实际检查。不要用 `ALL` 放行代替排查，也别把宝塔面板自身的管理端口与容器端口混为一谈。
-
-## 准备好这些东西
-
-你需要一台能运行所选镜像的服务器、可登录的宝塔面板、Docker、用于测试的 QQ 账号，以及一个可用模型服务。
-
-个人号协议端不能保证账号安全或长期可用。先了解项目说明和 QQ 平台要求；不要将重要账号与未经验证的自动化绑定。模型服务也可能收到聊天文本与图片，需要自行接受相应的数据处理方式。
-
-先不要填写任何真实凭据到公开笔记。之后备份数据时，也要把聊天和登录状态当作敏感文件。
-
-## 第一步：准备 Docker
-
-在宝塔的 Docker 页面确认环境能启动。AstrBot 已提供宝塔应用商店安装方式，见[官方宝塔文档](https://docs.astrbot.app/deploy/astrbot/btpanel.html)。
-
-![宝塔中搜索 AstrBot 的历史界面](../assets/blog-assets/astrbot-napcat-baota/05-search-astrbot.webp)
-
-有两条安装路线：
-
-1. 在应用商店安装 AstrBot，再手动创建 NapCat，并给两个容器设置一致的网络。
-2. 在 Docker 编排页面一起创建两个服务。
-
-为了把网络、端口和数据目录讲清楚，下面选第二条。**不要再同时运行应用商店里另一份同端口 AstrBot。** 已经安装好的用户，可检查现有配置，不必重建。
-
-## 第二步：在宝塔编排中启动两个容器
-
-仓库提供 [compose.yaml](../examples/astrbot-napcat/compose.yaml) 与 [.env.example](../examples/astrbot-napcat/.env.example)。这是基于 [NapCat-Docker 的 AstrBot 模板](https://github.com/NapNeko/NapCat-Docker/blob/f0599fb2eef4e9007aed72501849e2ca3eeaccdf/compose/astrbot.yml)整理的手动连接示例，没有开启其自动模板化 `MODE=astrbot`。
-
-在宝塔中新建编排项目，把这两个文件的内容分别放入编排与环境变量配置。镜像项没有内置 `latest`：请从 [AstrBot](https://github.com/AstrBotDevs/AstrBot) 和 [NapCat-Docker](https://github.com/NapNeko/NapCat-Docker) 确认当前可用镜像，填写你实际选择的固定标签或摘要，并记录下来。
-
-镜像值使用完整形式，例如 `仓库名:固定标签` 或 `仓库名@sha256:实际摘要`；这两段只是格式说明，不是可运行的镜像地址。若宝塔的编排界面不支持所用的环境变量展开方式，就在自己的编排中填入已选好的完整镜像值。不要把 `.env.example` 文件名原样当作自动加载的 `.env`。
-
-管理页的绑定地址由 `ADMIN_BIND_IP` 控制。模板默认值 `127.0.0.1` 适合在服务器本机通过 HTTPS 反向代理访问，或通过可选的本地隧道访问；此时外部的 `服务器IP:6185` 不会直通容器。要在**可信内网或 VPN**直接打开 `服务器IP:6185` 和 `服务器IP:6099/webui`，先在云安全组限定来源，核对宝塔的系统防火墙，再把 `ADMIN_BIND_IP` 改成该内网可达的绑定地址或 `0.0.0.0`，启动后从预期网络与非预期网络各检查一次。如果服务器同时有公网地址，`0.0.0.0` 也会绑定公网接口，不能只看内网测试通过。
-
-若只能从公网管理，建议保持默认回环绑定，用宝塔网站的反向代理和证书为管理页建立受限 HTTPS 入口，NapCat 页面也只对受信任来源开放。公网直接访问 `http://服务器IP:6185` 虽然技术上可行，但明文 HTTP 不会保护登录凭据与 API Key，不能因为设置了来源 IP 白名单就当作加密连接。
-
-已有 Docker CLI 时，也可以在存放这两个文件的服务器项目目录执行：
-
-```sh
-docker compose --env-file .env config --quiet
-docker compose --env-file .env up -d
-docker compose ps
-```
-
-这里 `.env` 是你在服务器上填好的实际配置，不是仓库中的 `.env.example`。缺少镜像值时，模板会拒绝启动，而不是偷偷使用一个未知版本。本书没有在你的服务器上实际运行这些命令。
-
-模板持久化了：
-
-| 宿主机目录 | 用途 |
-| --- | --- |
-| `data/` | AstrBot 数据；同时挂到 NapCat 的相同 `/AstrBot/data` 路径，支持按这一方式共享媒体文件 |
-| `napcat/config/` | NapCat 配置 |
-| `ntqq/` | QQ 登录相关数据 |
-
-这些目录相对于编排项目位置创建，不要删除后期待系统仍记得配置。不要把它们提交到 Git。
-
-如果服务未启动，先看日志和挂载权限。不要为了省事对整个数据目录开放任意写入权限。
-
-## 第三步：打开各自的管理页面
-
-在宝塔的 Docker 容器列表确认两个容器都在运行，查看映射端口和日志。若已经按上一步配置了可信内网或 VPN 的 IP 直连，从有访问权限的设备打开：
+这一章按宝塔的图形界面走一遍完整链路：
 
 ```text
-http://服务器IP:6185
-http://服务器IP:6099/webui
+QQ
+  → NapCat
+  → OneBot v11 / WebSocket
+  → AstrBot
+  → 模型服务
+  → AstrBot
+  → NapCat
+  → QQ
 ```
 
-地址中的 `服务器IP` 是这台管理设备可达的服务器地址，不是容器地址。直接在浏览器输入 `http://服务器IP:6199` 不会打开管理页；那是 OneBot 连接使用的端口，本例根本没有把它映射出来。如果用 HTTPS 反向代理，则打开你在宝塔网站里配置好的 HTTPS 地址，而不是上面这两个明文 HTTP 地址。
+目标不是先把所有插件装齐，而是先完成一次最小闭环：QQ 发消息，NapCat 收到，AstrBot 调用模型，回复再回到 QQ。原教程中的宝塔、AstrBot、NapCat 和日志截图都按操作顺序放在下面，页面文字会随版本变化，但要找的字段基本相同。
 
-已经通过 SSH 管理服务器、但不方便配置另一种受限访问方式的用户，也可以**选择**维持回环绑定，建立本地隧道：
+## 先看四个端口
 
-```sh
-ssh -N -L 16185:127.0.0.1:6185 -L 16099:127.0.0.1:6099 管理账号@服务器地址
-```
+| 端口 | 用途 | 浏览器是否直接打开 |
+| --- | --- | --- |
+| `6185` | AstrBot WebUI | 是，例如 `http://服务器IP:6185` |
+| `6099` | NapCat WebUI | 是，例如 `http://服务器IP:6099/webui` |
+| `6199` | AstrBot 的 OneBot v11 反向 WebSocket | 不是网页，用来让协议端连接 AstrBot |
+| `3000 / 3001` | NapCat 的可选服务 | 按你的 NapCat 配置决定 |
 
-这时在本机打开 `http://127.0.0.1:16185` 和 `http://127.0.0.1:16099/webui`。隧道终端需要保持连接；本机端口被占用时可改 `16185`、`16099`，并同步修改浏览器地址。这条路径不要求在公网发布 `6185` 或 `6099`。
+`6185` 和 `6099` 是管理页面，`6199` 是聊天事件的连接入口。浏览器打开 `http://服务器IP:6199`，不会得到 AstrBot 管理页。
 
-![AstrBot 欢迎页的历史界面](../assets/blog-assets/astrbot-napcat-baota/11-astrbot-welcome.webp)
-
-先完成 AstrBot 的实际初始化与账户设置，不在教程里依赖永久有效的默认密码。NapCat 的登录 token 按当前容器日志和官方说明获取，不使用截图里的值。
-
-管理页打不开，先核对选的是 IP 直连、反向代理还是隧道，再看绑定地址、Docker 映射和相应网络规则。不要为了省事长期公开裸露管理页。
-
-不确定 NapCat 的登录 token 在哪里时，可以在宝塔打开该容器日志；CLI 对应命令是 `docker compose logs napcat`。日志可能包含登录链接和凭据，查看后不要整段复制到公开求助帖。
-
-## 第四步：登录 QQ 协议端
-
-打开 NapCat 页面，按当前版本的提示登录测试 QQ。扫码、验证码和设备确认应由账号持有者完成。
-
-![NapCat 基础信息页的历史界面](../assets/blog-assets/astrbot-napcat-baota/15-napcat-dashboard.webp)
-
-二维码、登录状态与 WebUI token 都不要发进群或公开 Issue。风控或验证失败时，按项目及平台提示处理，不连续盲目重试。
-
-这一步只确认 NapCat 已登录 QQ，还没有证明 AstrBot 已连接。
-
-## 第五步：先把模型单独测通
-
-在 AstrBot 的模型提供商页面，按服务商说明配置接口地址、API Key 和实际模型 ID，再选择要用于这个配置或会话的聊天模型。菜单名称可能随版本变化。
-
-![AstrBot 模型配置入口的历史界面](../assets/blog-assets/astrbot-napcat-baota/16-astrbot-model-entry.webp)
-
-本书不要求特定服务商，也不把旧截图里的模型名当成当前可用列表。特别留意接口地址的路径是否已经包含版本前缀；按服务商与 AstrBot 文档匹配，不凭猜测反复添加 `/v1`。
-
-先在 AstrBot 自带聊天入口发一句普通消息。失败时检查凭据、余额、模型 ID、网络和日志。这时还不涉及 QQ，便于把问题缩小。
-
-原生看图、工具调用与纯文本对话是不同能力。第一句正常回复，不代表它们已经全部配置好。
-
-## 第六步：让 AstrBot 等待 OneBot 连接
-
-在 AstrBot 的“机器人”管理里新增 OneBot v11 实例：
-
-| 项目 | 本例设置 |
-| --- | --- |
-| 实例 ID | 自己能识别的名字，例如 `qq-napcat` |
-| 启用 | 开启 |
-| 反向 WebSocket 主机地址 | `0.0.0.0`，使容器内服务可被同网络容器访问 |
-| 反向 WebSocket 端口 | `6199` |
-| 反向 WebSocket Token | 为这条连接生成的随机 token |
-
-这里的 `0.0.0.0` 是监听地址，不是让 NapCat 连接的目标地址；本例也没有把 `6199` 发布到服务器公网。
-
-![AstrBot OneBot v11 表单的历史界面](../assets/blog-assets/astrbot-napcat-baota/24-create-onebot-robot.webp)
-
-图中 token 字段可能为空。本书实例应填入非空值，随后在 NapCat 的 OneBot 客户端配置中填同一个值。
-
-**OneBot token 与 NapCat WebUI 登录 token 用途不同，不需要复用。** 上面的 `.env` 也不会自动替你配置这两个页面的认证信息。
-
-## 第七步：让 NapCat 连接 AstrBot
-
-在 NapCat 网络配置中新增并启用 WebSocket 客户端，目标地址填写：
+如果 AstrBot 和 NapCat 在同一个 Docker 网络，NapCat 可以直接连接 AstrBot 的容器名或服务名，例如：
 
 ```text
 ws://astrbot:6199/ws
 ```
 
-这里的 `astrbot` 来自编排里的服务名，两者处在同一用户自定义网络，所以可以解析。也可以填同网络中 AstrBot 容器的内部 IP，但重建后可能改变，长期连接优先用服务名。填写匹配的 OneBot token 并保存。
+如果两个容器不在同一网络，才使用宿主机地址：
 
-![NapCat 新建 WebSocket 客户端的历史界面](../assets/blog-assets/astrbot-napcat-baota/25-create-napcat-ws-client.webp)
+```text
+ws://服务器IP:6199/ws
+```
 
-回到 AstrBot 日志，查找适配器已连接的记录。不要仅凭 NapCat 页面显示“已登录 QQ”，就认定反向连接完成。
+后一种方式需要把 `6199` 发布到宿主机，并让外部网络能够到达它。两种方式不要混用。
 
-如果两者部署在不同机器，本章这个地址不适用。那需要重新设计可达地址、认证和受保护的传输方式；不能直接把 `6199` 无认证开放到公网。
+## 1. 准备服务器与端口
 
-## 第八步：从 QQ 走一遍
+你需要：
 
-用另一个 QQ 账号给机器人发一句“你好”，按顺序看：
+- 一台能运行 Docker 的 Linux 云服务器；
+- 已经可以登录的宝塔面板；
+- 一个用于登录协议端的 QQ 账号；
+- 一个可用的模型服务和 API Key；
+- 浏览器。
 
-1. 协议端是否收到事件。
-2. AstrBot 是否收到对应私聊。
-3. 是否调用了你选择的模型。
-4. 模型是否返回可见正文或正确的发送结果。
-5. QQ 是否收到回复。
+个人 QQ 协议端可能受到账号风控和平台规则影响。先使用自己愿意承担风险的测试账号，确认项目说明和平台规则后再登录。
 
-![原部署文章中的 QQ 回复示例](../assets/blog-assets/astrbot-napcat-baota/28-qq-bot-reply.webp)
+云服务器的安全组或上游防火墙、宝塔管理的系统防火墙、Docker 的端口发布是三层不同位置。三层都要与当前拓扑一致：
 
-这张图只用来说明“QQ 收到回复”这一结果，不是本书对台词、气泡数量或人物表现的评分标准，也不是本次重新部署的实测截图。
+1. 云服务器控制台允许访问的来源和端口。
+2. 宝塔“安全”页面中的系统防火墙规则。
+3. 容器是否把端口发布到宿主机，以及发布到了哪个地址。
 
-再发一张普通图片，检查模型实际是否能处理。图片失败时要区分模型能力、文件可达性和媒体传递方式，不要立即给人设加“你可以看图”。
+![腾讯云轻量服务器防火墙页面](../assets/blog-assets/astrbot-napcat-baota/01-cloud-firewall.webp)
 
-## 第九步：保存一个能恢复的起点
+在云平台添加规则时，选择 TCP，端口填实际要从外部访问的端口。直接测试时通常需要 `6185` 和 `6099`；只有协议端容器不在 AstrBot 的 Docker 网络中时，才需要让 `6199` 从外部可达。
 
-在继续装插件前，记录 AstrBot、NapCat、镜像、模型 ID 和当前配置。导出必要设置，在不会被公开访问的位置备份数据。
+![安全组规则字段](../assets/blog-assets/astrbot-napcat-baota/02-firewall-rule-fields.webp)
 
-数据存储正在写入时，直接拷贝不一定形成一致的备份；使用项目支持的导出方式，或在合适的维护窗口停止相关服务再备份。至少知道恢复时要放回哪些目录，以及镜像升级后是否涉及数据兼容。
+不要把全部端口长期放开。先让页面和连接跑通，再把来源范围收紧到自己的 IP、内网或 VPN。
 
-现在才适合逐个加入第 3、4 章的能力。不要一口气安装所有拟人化插件，否则第一次异常出现时，很难知道是谁改了输入或抢了发送。
+## 2. 在宝塔准备 Docker
 
-## 快速排错
+进入宝塔的应用管理或 Docker 模块。
+
+![宝塔应用管理](../assets/blog-assets/astrbot-napcat-baota/03-baota-app-management.webp)
+
+如果还没有 Docker 模块，先安装它。
+
+![安装宝塔 Docker 模块](../assets/blog-assets/astrbot-napcat-baota/04-install-docker-module.webp)
+
+打开 Docker 页面后，确认应用商店、容器、镜像、网络和容器编排等入口都能使用。后面会分别用到“应用商店”和“容器”两个页面。
+
+## 3. 安装 AstrBot
+
+### 用应用商店安装
+
+在 Docker 应用商店搜索 AstrBot。
+
+![搜索 AstrBot](../assets/blog-assets/astrbot-napcat-baota/05-search-astrbot.webp)
+
+点击安装后，检查容器名称、版本和服务端口。AstrBot WebUI 默认使用 `6185`。
+
+![AstrBot 安装配置](../assets/blog-assets/astrbot-napcat-baota/06-astrbot-install-options.webp)
+
+镜像版本可以先用当前项目提供的稳定标签；如果你要长期运行，记录实际使用的标签或摘要，升级时更容易复现。
+
+安装完成后先看容器日志。
+
+![AstrBot WebUI 启动日志](../assets/blog-assets/astrbot-napcat-baota/07-astrbot-webui-log.webp)
+
+### 用容器编排安装
+
+也可以在宝塔“容器编排”里创建 AstrBot。下面的截图展示了编排页面中的端口、数据目录和网络位置：
+
+![宝塔容器编排中的 AstrBot 配置](../assets/blog-assets/astrbot-napcat-baota/08-compose-ports.webp)
+
+本书提供了一份可编辑的[双容器 Compose 示例](../examples/astrbot-napcat/compose.yaml)。其中：
+
+- `6185` 用于 AstrBot WebUI；
+- `6099` 用于 NapCat WebUI；
+- 两个服务加入同一个 Docker 网络；
+- `6199` 只在需要从宿主机或另一个网络连接时发布；
+- `data/`、NapCat 配置和 QQ 登录数据需要持久化。
+
+这份示例的 `ADMIN_BIND_IP` 默认是 `127.0.0.1`，适合配合反向代理或本地隧道使用。若要直接打开 `http://服务器IP:6185` 和 `http://服务器IP:6099/webui`，在确认云安全组和宝塔防火墙已经限制来源后，把它改成服务器可达的绑定地址，例如 `0.0.0.0`；只改防火墙而不改绑定地址，页面仍然只监听本机。
+
+如果采用应用商店安装 AstrBot，记下它实际加入的 Docker 网络名称，创建 NapCat 时把 NapCat 加入同一网络。
+
+### 打开 AstrBot WebUI
+
+如果需要从服务器外部直接访问 `6185`，在宝塔“安全”中放行它。
+
+![宝塔放行 6185 端口](../assets/blog-assets/astrbot-napcat-baota/09-baota-open-6185.webp)
+
+浏览器打开：
+
+```text
+http://服务器IP:6185
+```
+
+![AstrBot 地址栏](../assets/blog-assets/astrbot-napcat-baota/10-astrbot-url.webp)
+
+首次进入后完成 AstrBot 的初始化。
+
+![AstrBot 欢迎页](../assets/blog-assets/astrbot-napcat-baota/11-astrbot-welcome.webp)
+
+## 4. 创建 NapCat 容器
+
+回到宝塔 Docker 的“容器”页面，点击“创建容器”，选择“手动创建”。
+
+![手动创建 NapCat 容器](../assets/blog-assets/astrbot-napcat-baota/12-create-napcat-container.webp)
+
+填写容器名称、当前可用的 NapCat-Docker 镜像和端口。截图中的端口对应关系是：
+
+| 本地端口 | 容器端口 | 用途 |
+| --- | --- | --- |
+| `6099` | `6099` | NapCat WebUI |
+| `3001` | `3001` | NapCat 可选服务 |
+| `3000` | `3000` | NapCat 可选服务 |
+
+`6099` 要发布到宿主机，才能用浏览器打开 NapCat WebUI。`3000` 和 `3001` 是否发布，按你当前使用的功能决定。
+
+如果界面提供“挂载”或“卷”设置，把配置和登录数据放到容器外。书中 Compose 示例使用：
+
+| 宿主机目录 | 容器目录 | 用途 |
+| --- | --- | --- |
+| `./data` | `/AstrBot/data` | AstrBot 数据与共享媒体 |
+| `./napcat/config` | `/app/napcat/config` | NapCat 配置 |
+| `./ntqq` | `/app/.config/QQ` | QQ 登录数据 |
+
+不同 NapCat 镜像的容器路径可能不同；如果当前镜像文档给出了不同路径，以镜像文档为准。没有持久化这些目录，重建容器后就可能丢失配置或登录状态。
+
+创建时在网络设置中选择 AstrBot 所在的用户自定义 Docker 网络。若宝塔把两个容器放进了同一个网络，后面可以使用 AstrBot 的服务名或容器名连接 `6199`，不需要把 `6199` 暴露到公网。
+
+如果两个容器已经启动但网络不同，到宝塔 Docker 的“网络”页面把 NapCat 连接到 AstrBot 所在的网络，再重启 NapCat。
+
+## 5. 登录 NapCat
+
+创建完成后，打开 NapCat 容器日志，找到 WebUI 地址和登录 token。
+
+![NapCat 容器日志中的 WebUI token](../assets/blog-assets/astrbot-napcat-baota/13-napcat-token-log.webp)
+
+在浏览器打开日志给出的地址，常见形式是：
+
+```text
+http://服务器IP:6099/webui
+```
+
+![NapCat WebUI 登录页](../assets/blog-assets/astrbot-napcat-baota/14-napcat-login.webp)
+
+登录后进入基础信息页。
+
+![NapCat 基础信息页](../assets/blog-assets/astrbot-napcat-baota/15-napcat-dashboard.webp)
+
+接着按 NapCat 页面提示登录 QQ。扫码、验证码和设备确认都需要由账号持有者完成。
+
+## 6. 配置模型
+
+QQ 链路还没接好时，可以先在 AstrBot 内把模型单独测通。进入“模型提供商”或欢迎页里的模型配置入口。
+
+![AstrBot 模型配置入口](../assets/blog-assets/astrbot-napcat-baota/16-astrbot-model-entry.webp)
+
+选择服务商。截图以 DeepSeek 为例，使用其他 OpenAI Compatible 服务时，填写对应的 API Base URL 和模型 ID。
+
+![选择 AstrBot 模型提供商](../assets/blog-assets/astrbot-napcat-baota/17-astrbot-provider-select.webp)
+
+在服务商控制台创建 API Key。
+
+![创建 DeepSeek API Key](../assets/blog-assets/astrbot-napcat-baota/18-deepseek-create-key.webp)
+
+创建完成后立即复制并保存。截图中的 key 只用于展示复制位置，不要把自己的 key 放进截图或聊天记录。
+
+![复制 DeepSeek API Key](../assets/blog-assets/astrbot-napcat-baota/19-deepseek-copy-key.webp)
+
+回到 AstrBot，填写 API Key 和 Base URL。
+
+![在 AstrBot 中填写 API Key](../assets/blog-assets/astrbot-napcat-baota/20-astrbot-api-key.webp)
+
+接着获取模型列表。
+
+![获取模型列表](../assets/blog-assets/astrbot-napcat-baota/21-astrbot-model-list.webp)
+
+将需要使用的模型加入配置。
+
+![添加 LLM](../assets/blog-assets/astrbot-napcat-baota/22-add-llm.webp)
+
+最后选择默认 LLM。
+
+![选择默认 LLM](../assets/blog-assets/astrbot-napcat-baota/23-default-llm.webp)
+
+先在 AstrBot 的聊天入口发一句普通消息。只有模型单独返回正常，才继续排查 QQ 链路；这样能把 API Key、余额、模型 ID 和网络问题与 OneBot 问题分开。
+
+## 7. 创建 AstrBot 的 OneBot v11 入口
+
+在 AstrBot 的“机器人”页面创建机器人，平台类型选择 `OneBot v11`。
+
+![创建 AstrBot OneBot v11 机器人](../assets/blog-assets/astrbot-napcat-baota/24-create-onebot-robot.webp)
+
+按下面填写：
+
+| 字段 | 填写 |
+| --- | --- |
+| 机器人名称 | 自己能认出的名称，例如 `qq-napcat` |
+| 启用 | 打开 |
+| 反向 WebSocket 主机 | `0.0.0.0` |
+| 反向 WebSocket 端口 | `6199` |
+| 反向 WebSocket Token | 填一个随机值 |
+
+这里的 `0.0.0.0` 是 AstrBot 在容器内监听所有网卡，不是 NapCat 要填写的连接地址。OneBot Token 两边必须完全一致；它与 NapCat WebUI token、模型 API Key 是三种不同凭据。
+
+如果 NapCat 与 AstrBot 在同一 Docker 网络，`6199` 可以只在容器网络内使用。如果 NapCat 在别的网络，才在 AstrBot 容器中发布 `6199:6199`，然后按服务器 IP 和防火墙规则连接。
+
+## 8. 让 NapCat 连接 AstrBot
+
+进入 NapCat 的“网络配置”，点击新建，选择“Websocket 客户端”。
+
+![NapCat 新建 WebSocket 客户端](../assets/blog-assets/astrbot-napcat-baota/25-create-napcat-ws-client.webp)
+
+启用配置，填写 URL 和 Token。
+
+![NapCat WebSocket 客户端设置](../assets/blog-assets/astrbot-napcat-baota/26-napcat-ws-client-settings.webp)
+
+根据网络拓扑选择 URL：
+
+```text
+# 两个容器在同一个 Docker 网络
+ws://astrbot:6199/ws
+
+# 两个容器不在同一个 Docker 网络，使用宿主机发布的端口
+ws://服务器IP:6199/ws
+```
+
+`astrbot` 必须替换成宝塔里实际可解析的 AstrBot 服务名或容器名。也可以临时填写 AstrBot 容器在共享网络中的内部 IP，但容器重建后 IP 可能变化。
+
+保存后回到 AstrBot 日志，看到 OneBot v11 / aiocqhttp 适配器连接成功。
+
+![AstrBot 显示 NapCat 已连接](../assets/blog-assets/astrbot-napcat-baota/27-astrbot-napcat-connected-log.webp)
+
+如果连接失败，按这个顺序检查：
+
+1. NapCat 和 AstrBot 是否真的处于同一个 Docker 网络。
+2. 同网络连接时，容器名是否能解析。
+3. `6199` 是否为 AstrBot 容器内监听端口。
+4. 外部连接时，`6199` 是否发布、云防火墙和宝塔防火墙是否允许。
+5. URL 是否带有 `/ws`。
+6. 两边 OneBot Token 是否完全一致。
+
+## 9. 从 QQ 走一遍完整测试
+
+用另一个 QQ 账号给 bot 发一句“你好”。
+
+先看 QQ 是否收到回复：
+
+![QQ 端收到 bot 回复](../assets/blog-assets/astrbot-napcat-baota/28-qq-bot-reply.webp)
+
+再按链路顺序检查日志：
+
+![NapCat 收发消息日志](../assets/blog-assets/astrbot-napcat-baota/29-napcat-message-log.webp)
+
+![AstrBot 收发消息日志](../assets/blog-assets/astrbot-napcat-baota/30-astrbot-message-log.webp)
+
+一条消息完整通过时，应该能依次看到：
+
+1. QQ 把消息交给 NapCat。
+2. NapCat 通过 OneBot 上报给 AstrBot。
+3. AstrBot 调用默认模型。
+4. 模型返回文本或工具请求。
+5. AstrBot 将结果交给 NapCat。
+6. QQ 显示回复。
+
+这条链路通了以后，再测试图片、插件和人设。不要在基础消息还没跑通时同时安装一组会改输入、分段或发送行为的插件。
+
+## 10. 快速排错
 
 | 现象 | 先看 |
 | --- | --- |
-| 管理页打不开 | URL 是否用了 `6185`/`6099` 而非 `6199`；容器状态、`ADMIN_BIND_IP`、映射、云安全组与宝塔防火墙；选择隧道时检查连接 |
-| QQ 登录正常，AstrBot 没事件 | OneBot 实例启用状态、客户端目标地址、两端 token |
-| AstrBot 有事件，但模型失败 | 实际模型、凭据、余额、接口路径、服务商返回 |
-| 文字正常，图片不行 | 模型图片能力、共享路径、协议端文件读取、发送返回 |
-| 重启后需要重新配置 | 数据挂载是否指向原目录、权限是否正确 |
+| AstrBot WebUI 打不开 | `6185` 是否发布；服务器 IP、云安全组、宝塔防火墙和容器状态 |
+| NapCat WebUI 打不开 | `6099` 是否发布；URL 是否带 `/webui`；容器日志中的实际地址 |
+| QQ 已登录但 AstrBot 没事件 | OneBot 机器人是否启用；NapCat WebSocket 客户端是否启用 |
+| WebSocket 连接失败 | Docker 网络、容器名、`6199`、`/ws` 路径和 Token |
+| AstrBot 能收到消息但模型不回复 | API Key、余额、Base URL、模型 ID 和默认 LLM |
+| 模型正常但 QQ 没回复 | AstrBot 到 NapCat 的连接、协议端日志和发送返回 |
+| 重启后配置丢失 | AstrBot 数据、NapCat 配置和 QQ 登录目录是否持久化 |
 
-参考：[AstrBot 宝塔部署](https://docs.astrbot.app/deploy/astrbot/btpanel.html)、[OneBot v11 接入](https://docs.astrbot.app/platform/aiocqhttp.html)、[NapCat-Docker](https://github.com/NapNeko/NapCat-Docker)、[原图文教程](../articles/astrbot-napcat-baota-deploy.md)。本书的编排示例尚未完成真实 QQ 登录与收发验收。
+重要的配置、人设和登录数据要放在服务器上的持久化目录，并在升级前做备份。模型服务和协议端都可能更新，遇到页面名称变化时，优先按当前版本的官方文档核对。
+
+参考：[AstrBot 宝塔部署文档](https://docs.astrbot.app/deploy/astrbot/btpanel.html)、[AstrBot OneBot v11 接入文档](https://docs.astrbot.app/platform/aiocqhttp.html)、[NapCat-Docker](https://github.com/NapNeko/NapCat-Docker)、[原图文教程](../articles/astrbot-napcat-baota-deploy.md)。
+
+---
+
+[上篇：选一个适合相处的模型](06-models.md) · [目录](../README.md) · [下篇：记忆、时间与主动联系](08-memory-and-tools.md)

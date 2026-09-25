@@ -39,6 +39,17 @@ class BookTests(unittest.TestCase):
         self.assertTrue(result["ok"], result["errors"])
         self.assertEqual(result["referenced_images"], 40)
 
+    def test_reader_pages_have_bottom_navigation(self):
+        pages = list((ROOT / "chapters").glob("*.md"))
+        pages += list((ROOT / "guides").glob("*.md"))
+        pages += [path for path in (ROOT / "articles").glob("*.md")
+                  if path.name != "README.md"]
+        for page in pages:
+            last_line = page.read_text(encoding="utf-8").rstrip().splitlines()[-1]
+            self.assertEqual(last_line.count("["), 3, page.name)
+            self.assertEqual(last_line.count("]"), 3, page.name)
+            self.assertIn("[目录]", last_line, page.name)
+
     def test_example_admin_ports_default_to_loopback_and_onebot_stays_internal(self):
         compose = (ROOT / "examples/astrbot-napcat/compose.yaml").read_text(encoding="utf-8")
         example_env = (ROOT / "examples/astrbot-napcat/.env.example").read_text(encoding="utf-8")

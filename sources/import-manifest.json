@@ -9,7 +9,7 @@
       "url": "https://raw.githubusercontent.com/Yuimi-chaya/Yuimi-chaya.github.io/4fd072b8efb10e34403037d6fda2f068d1acd934/src/content/blog/llm-rp-role-prompt-authoring-research.zh-CN.md",
       "destination": "articles/llm-rp-role-prompt-authoring-research.zh-CN.md",
       "original_sha256": "ac85f472298abd010793ecaa0a3ea5394cba0551f56d4749a5c3d9b4979f961e",
-      "local_sha256": "362c9b8fb91a723b2217a3a0993c2173ed2d6950f2aaf2cbff4ff451db7d0f69"
+      "local_sha256": "e5b0202df4c800a434c5f0de3b78ff4d74e9f82f4c1afb0dbffe3d78baf578b0"
     },
     {
       "title": "适用于单模型角色扮演第一人称人设的写作参考",
@@ -17,7 +17,7 @@
       "url": "https://raw.githubusercontent.com/Yuimi-chaya/Yuimi-chaya.github.io/4fd072b8efb10e34403037d6fda2f068d1acd934/src/content/blog/astrbot-roleplay-persona-notes.md",
       "destination": "articles/astrbot-roleplay-persona-notes.md",
       "original_sha256": "461715b95c931d12f60e32ad41ab831a817a2de10443db144eebac16bf2590a3",
-      "local_sha256": "f7321f6c1cc31f9a08352ecf858f3fb7d3dc86bc9fd637712973fe6286aa8f70"
+      "local_sha256": "8be94e40d34c7fb9cfd9d6c887a21438a1fde8f4d998164b83953e8093f93366"
     },
     {
       "title": "我做 AstrBot 插件这一年,最值钱的其实不是代码",
@@ -25,7 +25,7 @@
       "url": "https://raw.githubusercontent.com/Yuimi-chaya/Yuimi-chaya.github.io/4fd072b8efb10e34403037d6fda2f068d1acd934/src/content/blog/astrbot-plugin-dev-experience.md",
       "destination": "articles/astrbot-plugin-dev-experience.md",
       "original_sha256": "e09d6c0476f6597d15c2e007b49f64502eca878febc06902ca5fe452dee2d595",
-      "local_sha256": "c41244cd67ff17491ea7f38cceb4491018079d4c36c6421f78d2c4d7b2437c03"
+      "local_sha256": "cd5718446fdb4e49cb8a2309837634b1e9b0af1467e86ac4671ae1cfbe220314"
     },
     {
       "title": "AstrBot 部署教程：宝塔面板 + NapCat 搭建 QQ 机器人",
@@ -33,7 +33,7 @@
       "url": "https://raw.githubusercontent.com/Yuimi-chaya/Yuimi-chaya.github.io/4fd072b8efb10e34403037d6fda2f068d1acd934/src/content/blog/astrbot-napcat-baota-deploy.md",
       "destination": "articles/astrbot-napcat-baota-deploy.md",
       "original_sha256": "2ea1fcea2b8518ead1ec3612d7ef6925ad6efad25fe96d4fe4fb6621a8d80065",
-      "local_sha256": "01349cea576fc76fa678fbaefbe38ffa4fc7479b210163dad09c73751420053b"
+      "local_sha256": "0097507e7f07c03007a7470f65bdc6066d1bf73f98fe6eebb55577f7bc57961a"
     },
     {
       "title": "对 AI 产生感情真的很奇怪吗？",
@@ -41,7 +41,7 @@
       "url": "https://raw.githubusercontent.com/Yuimi-chaya/Yuimi-chaya.github.io/4fd072b8efb10e34403037d6fda2f068d1acd934/src/content/blog/is-it-strange-to-feel-for-ai.md",
       "destination": "articles/is-it-strange-to-feel-for-ai.md",
       "original_sha256": "eeb271f5b2cd432440cc427ce14e0e21277a3ddcfa02ca83366315ed4df68754",
-      "local_sha256": "5c56aa7b09597646c0788753a9b39cc138a73c433295276bdc6e00881c11f7db"
+      "local_sha256": "684d1e11a9bd96d8d5ffa87e322b040b452d282c1757144efea874edf4b85f1d"
     }
   ],
   "assets": [

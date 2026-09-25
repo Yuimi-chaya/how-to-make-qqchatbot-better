@@ -117,7 +117,7 @@ AstrBot 文档中的默认摘要模板会提到项目进度和工具调用。这
 
 ![私聊中主动发出的两条消息](../assets/book/06-proactive-chat.png)
 
-截图展示主动消息的可见形式，不规定角色该怎样问候或连续发送几次。其中“忙了一上午”只有在上下文确知时才合适，不能仅凭触发时间推断用户在忙。
+主动消息也要接住已有对话；像“忙了一上午”这样的近况，应来自确知的上下文，而不是由触发时间猜测。
 
 这类插件可能用模拟的用户消息启动一次模型请求。**触发提示不是用户真的刚发了新消息**，也不是一项已安排好的提醒。插件自己的 `proactive_prompt` 需要让模型看懂这个区别，同时沿用当前会话的人物，不另造一位“负责主动联系”的角色。下面是可以放在该插件私聊主动消息提示词里的简例；两个双花括号字段是此插件提供的占位符，换插件要按它的实际字段改：
 
@@ -154,7 +154,7 @@ AstrBot 文档中的默认摘要模板会提到项目进度和工具调用。这
 
 ![FutureTask 的已注册任务列表](../assets/book/04-future-task-redacted.png)
 
-任务列表可查看名称、类型、计划时间与管理入口。截图中的会话 ID 已遮挡；所示日期属于当时的任务，不代表现在。
+在任务列表核对名称、类型和计划时间，也可以从这里管理已安排的任务。
 
 工具也不一定只有一个固定名字。提示词应服从宿主实际注册的定义，不用凭一篇文章猜工具名称、参数和成功条件。
 
@@ -186,3 +186,7 @@ AstrBot 文档中的默认摘要模板会提到项目进度和工具调用。这
 最后，提醒可提升体验，但不应被当作唯一可靠的现实保障。重要事项需要使用你能够确认可靠性的提醒渠道。
 
 参考：[遗忘插件 README](https://github.com/SinkAbyss/astrbot_plugin_llm_amnesia/blob/7dc9bf835169f8352fbf2471e2f139d89149aaff/README.md)、[主动消息插件 README](https://github.com/Pancakes-Labs/astrbot_plugin_proactive_chat/blob/3314246568b2982ee0e44959e60f916de4154f71/README.md)、[AstrBot 主动型能力](https://docs.astrbot.app/use/proactive-agent.html)、[上下文压缩](https://docs.astrbot.app/use/context-compress.html)、[Role Prompt Authoring 的宿主事实与能力边界](https://github.com/Yuimi-chaya/llm-rp-role-prompt-authoring/blob/fb3c0e96020475122b47696e91d2093bfff851d4/docs/zh-CN/runtime-profile.md)。
+
+---
+
+[上篇：AstrBot + NapCat + 宝塔](07-astrbot-deployment.md) · [目录](../README.md) · [下篇：感觉不对时怎么找原因](09-debugging.md)
