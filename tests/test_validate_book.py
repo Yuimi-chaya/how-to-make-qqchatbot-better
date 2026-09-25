@@ -64,7 +64,10 @@ class BookTests(unittest.TestCase):
                 encoding="utf-8"
             )
         )
-        self.assertEqual([item["role"] for item in example], ["user", "assistant"])
+        self.assertEqual(
+            [item["role"] for item in example],
+            ["user", "assistant", "user", "assistant"],
+        )
         self.assertTrue(example[0]["content"][0]["text"].startswith("【历史对话摘要】"))
         for heading in [
             "【初始目标 / 长期主线】",
@@ -77,7 +80,20 @@ class BookTests(unittest.TestCase):
         ]:
             self.assertIn(heading, example[0]["content"][0]["text"])
         self.assertEqual(example[1]["content"][0]["text"], "已收到")
+        self.assertEqual(example[2]["content"][0]["text"], "你好")
+        self.assertTrue(example[3]["content"][0]["text"])
         self.assertNotIn("<system_reminder>", json.dumps(example, ensure_ascii=False))
+
+    def test_handoff_request_contains_inputs_and_cleaning_requirements(self):
+        prompt = (ROOT / "examples/conversation-handoff-prompt.txt").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn("【将启用的新版角色提示词】", prompt)
+        self.assertIn("【旧会话完整历史】", prompt)
+        self.assertIn("【清洗与摘要要求】", prompt)
+        self.assertIn("【用户偏好与风格要求】", prompt)
+        self.assertIn(r"\n", prompt)
+        self.assertIn("单行 JSON 字符串字面量", prompt)
 
     def test_segmentation_example_keeps_spaces_inside_bubbles(self):
         pattern = (ROOT / "examples/astrbot-segment-regex.txt").read_text(
